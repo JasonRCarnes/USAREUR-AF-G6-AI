@@ -1,1 +1,16 @@
 
+[
+  {
+    "id": "EXAMPLE-001",
+    "title": "Approved Public IT Reference",
+    "url": "https://www.nist.gov/",
+    "owner": "Knowledge manager — replace with verified owner",
+    "version": "Example record",
+    "date": "2026-10-29",
+    "applicability": "Illustrative metadata only; not approved G6 policy",
+    "review_cycle": "Quarterly",
+    "status": "example",
+    "excerpt": "Replace with a short, verified excerpt from a reviewed document before approving this source."
+  }
+]
+
