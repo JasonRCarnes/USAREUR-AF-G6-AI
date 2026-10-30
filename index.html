@@ -1,332 +1,424 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="USAREUR-AF G6 Enterprise Information and Staff Support Prototype">
-  <meta name="theme-color" content="#0b1423">
-  <title>USAREUR-AF G6 | Enterprise Portal</title>
-  <link rel="stylesheet" href="./assets/styles.css">
-  <script src="./assets/app.js" defer></script>
+  <meta name="description" content="USAREUR-AF G6 Enterprise Operational Guidance, Utilities, and AI Directory Portal">
+  <title>USAREUR-AF G6 | Enterprise C4 & Cyber Support Portal</title>
+  <!-- Tailwind CSS CDN for guaranteed crisp rendering on GitHub Pages -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .classification-banner {
+      background-color: #007a3d;
+      color: #ffffff;
+      font-weight: 700;
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      padding: 4px 0;
+    }
+    .chat-bubble-ai {
+      background-color: #1e293b;
+      border-left: 4px solid #3b82f6;
+    }
+    .chat-bubble-user {
+      background-color: #172554;
+      border-right: 4px solid #60a5fa;
+    }
+    .tab-btn.active {
+      background-color: #1d4ed8;
+      color: #ffffff;
+      border-color: #60a5fa;
+    }
+  </style>
 </head>
-<body>
-  <!-- Top Unclassified Banner -->
-  <div class="security-banner">
-    UNCLASSIFIED — PUBLIC INFORMATION ONLY · PROTOTYPE ENVIRONMENT
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+  <!-- Top Security Classification Banner -->
+  <div class="classification-banner sticky top-0 z-50 shadow">
+    UNCLASSIFIED // PUBLIC INFORMATION &amp; PROTOTYPE ENVIRONMENT
   </div>
 
-  <div class="app-shell">
-    <!-- Left Navigation Sidebar -->
-    <aside class="sidebar" id="sidebar">
-      <a class="brand" href="./" data-nav="dashboard">
-        <span class="brand-logo">G6</span>
-        <span>
-          <strong>G6 ENTERPRISE</strong>
-          <small>Information &amp; Staff Portal</small>
+  <!-- USG Warning & VDI Status Bar -->
+  <aside aria-label="System Notice" class="bg-amber-950/90 border-b border-amber-800/80 text-amber-200 px-4 py-1.5 text-xs">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <span><strong>USG NOTICE:</strong> USAREUR-AF G6 Prototype Information System. Advisory Support &amp; Unclassified Workflows Only.</span>
+      <div class="flex items-center space-x-4 font-mono text-amber-300">
+        <span id="vdi-connection-pill" class="inline-flex items-center px-2 py-0.5 rounded bg-slate-900 border border-amber-700 text-[11px]">
+          ● AI Engine: Local + VDI Ready
         </span>
-      </a>
+        <span class="hidden sm:inline">24/7 G6 OPS DESK: DSN 314-537-1110</span>
+      </div>
+    </div>
+  </aside>
 
-      <div class="sidebar-label">MISSION WORKSPACE</div>
-      <nav class="navigation" aria-label="Main navigation">
-        <button class="nav-link active" data-nav="dashboard" type="button">
-          <span>▦</span> Command Overview
-        </button>
-        <button class="nav-link" data-nav="workspaces" type="button">
-          <span>▤</span> G6 Divisions (8)
-        </button>
-        <button class="nav-link" data-nav="assistant" type="button">
-          <span>✧</span> G6 AI Assistant
-          <span class="nav-tag">MOCK AI</span>
-        </button>
+  <!-- Main Header & Navigation Bar -->
+  <header class="bg-slate-900 border-b border-slate-800 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <!-- Brand Identity -->
+      <div class="flex items-center space-x-3.5">
+        <div class="w-11 h-11 bg-gradient-to-br from-blue-700 to-blue-900 border-2 border-blue-400 rounded-xl flex items-center justify-center font-extrabold text-lg text-white shadow-md">
+          G6
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-lg sm:text-xl font-extrabold tracking-wide uppercase text-white">USAREUR-AF G6 Directorate</h1>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-950 text-emerald-300 border border-emerald-700">
+              ● Theater Systems: GREEN
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">Enterprise C4 Systems • Cyber Defense • Architecture &amp; AI Staff Support</p>
+        </div>
+      </div>
 
-        <div class="sidebar-label">ENTERPRISE UTILITIES</div>
-        <button class="nav-link" data-nav="documents" type="button">
-          <span>▧</span> Staff Product Generator
+      <!-- Clean Top Navigation Tabs -->
+      <nav class="flex flex-wrap gap-2" aria-label="Portal Workspaces">
+        <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn active text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-800 transition">
+          ⚡ Practical Guidance &amp; AI
         </button>
-        <button class="nav-link" data-nav="knowledge" type="button">
-          <span>⌕</span> SOP &amp; Knowledge Base
+        <button onclick="switchTab('divisions')" id="tab-divisions" class="tab-btn text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-800 transition">
+          🏛️ G6 Divisions (8)
         </button>
-        <button class="nav-link" data-nav="tracker" type="button">
-          <span>☷</span> Governance &amp; Action Tracker
+        <button onclick="switchTab('generator')" id="tab-generator" class="tab-btn text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-800 transition">
+          📝 Staff Document Generator
         </button>
-
-        <div class="sidebar-label">SYSTEM INFO</div>
-        <button class="nav-link" data-nav="about" type="button">
-          <span>ⓘ</span> Architecture &amp; Scope
+        <button onclick="switchTab('vdi')" id="tab-vdi" class="tab-btn text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-800 transition">
+          🖥️ VDI Claude AI Config
         </button>
       </nav>
+    </div>
+  </header>
 
-      <div class="sidebar-bottom">
-        <div class="demo-card">
-          <span class="status-dot"></span>
+  <!-- MAIN WORKSPACE CONTAINER -->
+  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow space-y-8">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: PRACTICAL GUIDANCE & AI OVERVIEW    -->
+    <!-- ========================================== -->
+    <div id="panel-overview" class="space-y-8">
+
+      <!-- HERO / PRACTICAL AI GUIDANCE SEARCH -->
+      <section class="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 border border-blue-700/50 rounded-2xl p-6 sm:p-8 shadow-2xl">
+        <div class="max-w-3xl mx-auto text-center space-y-3">
+          <span class="inline-block px-3 py-1 bg-blue-900/80 text-blue-300 border border-blue-500/60 rounded-full text-xs font-bold uppercase tracking-wider">
+            Sentinel-6 &amp; VDI AI Mission Guidance Engine
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            How Can USAREUR-AF G6 Support Your Unit Today?
+          </h2>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Get instant step-by-step guidance on SAR/GAR satellite windows, SIPR/NIPR account tokens, classified spillage containment, eMASS RMF packages, or firewall PPSM exemptions.
+          </p>
+
+          <!-- Search Input Bar -->
+          <div class="relative mt-5">
+            <input
+              type="text"
+              id="ai-query-input"
+              placeholder="Ask any G6 workflow question or request a staff product (e.g., 'Request SATCOM', 'Spillage action plan', 'Draft EXSUM')..."
+              class="w-full bg-slate-950/90 text-white placeholder-slate-400 text-sm rounded-xl pl-4 pr-32 py-4 border border-slate-600 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500 shadow-inner"
+              onkeydown="if(event.key === 'Enter') handleUserQuery()"
+            >
+            <button
+              onclick="handleUserQuery()"
+              id="ask-btn"
+              class="absolute right-2 top-2 bottom-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-5 rounded-lg transition-colors shadow-md">
+              Ask G6 AI →
+            </button>
+          </div>
+
+          <!-- Instant Practical Quick Action Chips -->
+          <div class="flex flex-wrap items-center justify-center gap-2 pt-3 text-xs">
+            <span class="text-slate-400 font-semibold">Quick Workflows:</span>
+            <button onclick="fillQuery('How do I submit an emergency SAR/GAR for satellite bandwidth?')" class="bg-slate-800/90 hover:bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 text-slate-200 transition">🛰️ Request SATCOM</button>
+            <button onclick="fillQuery('Who do I contact for classified spillage or cyber incident?')" class="bg-red-950/60 hover:bg-red-900/70 border border-red-700/70 rounded-lg px-3 py-1.5 text-red-200 transition">🚨 Spillage Action Plan</button>
+            <button onclick="fillQuery('How do I open a firewall port via PPSM?')" class="bg-slate-800/90 hover:bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 text-slate-200 transition">🛡️ Open Firewall Port</button>
+            <button onclick="fillQuery('Where do I request tactical COMSEC crypto keys?')" class="bg-slate-800/90 hover:bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 text-slate-200 transition">🔑 Request Crypto Keys</button>
+            <button onclick="fillQuery('Where do I request SIPRNet or NIPRNet account access?')" class="bg-slate-800/90 hover:bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 text-slate-200 transition">💻 SIPR/NIPR Account</button>
+            <button onclick="fillQuery('What are the steps to register an eMASS package for ATO?')" class="bg-slate-800/90 hover:bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 text-slate-200 transition">📋 eMASS RMF ATO</button>
+          </div>
+        </div>
+
+        <!-- Interactive AI Conversation & Answer Display Box -->
+        <div id="ai-response-container" class="mt-6 max-w-4xl mx-auto hidden">
+          <div class="bg-slate-900/95 border border-slate-700 rounded-xl p-5 shadow-xl space-y-4">
+            <div class="flex flex-wrap items-center justify-between border-b border-slate-800 pb-3 gap-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
+                <span class="font-bold text-xs uppercase tracking-wider text-blue-300">G6 AI Workflow &amp; Staff Advisor</span>
+                <span id="response-badge" class="text-xs bg-blue-950 text-blue-300 border border-blue-800 px-2 py-0.5 rounded font-mono">Ready</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <button onclick="clearConversation()" class="text-xs text-slate-300 hover:text-white bg-slate-800 border border-slate-700 rounded px-2.5 py-1">
+                  Clear Chat
+                </button>
+                <button onclick="document.getElementById('ai-response-container').classList.add('hidden')" class="text-xs text-slate-400 hover:text-white px-2 py-1">
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            <!-- Conversation Log -->
+            <div id="chat-history" class="space-y-3 max-h-96 overflow-y-auto pr-1" role="log" aria-live="polite"></div>
+
+            <!-- Current Action Bar -->
+            <div id="ai-action-buttons" class="pt-2 border-t border-slate-800 flex flex-wrap justify-between items-center gap-2 text-xs"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CORE 8 G6 OPERATIONAL DESKS & SELF-SERVICE TOOLS -->
+      <section>
+        <div class="flex items-center justify-between mb-4">
           <div>
-            <strong>Mock AI Engine Active</strong>
-            <small>Local demonstration mode · No API key required</small>
+            <h3 class="text-sm font-extrabold uppercase tracking-wider text-blue-400">G6 Directorate Functional Desks &amp; Unclassified Tools</h3>
+            <p class="text-xs text-slate-400">Select any operational workflow below for immediate checklists, routing, and AI staff support.</p>
+          </div>
+          <button onclick="switchTab('divisions')" class="text-xs text-blue-400 hover:text-blue-300 font-semibold">
+            Explore All 8 Divisions →
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Desk 1: SATCOM & Tactical C4 -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-blue-500/80 transition shadow-md">
+            <div>
+              <div class="flex items-center justify-between text-blue-400 mb-2">
+                <span class="font-bold text-xs font-mono bg-blue-950/80 border border-blue-800 px-2 py-0.5 rounded">C4 / TACTICAL</span>
+                <span class="text-lg">📡</span>
+              </div>
+              <h4 class="text-base font-bold text-white mb-1">SATCOM &amp; Tactical Radios</h4>
+              <p class="text-xs text-slate-400 mb-4">Submit SAR/GAR requests, acquire Land Mobile Radio (LMR) talkgroups, and manage KMI COMSEC key allocations.</p>
+            </div>
+            <div class="space-y-2 border-t border-slate-800 pt-3">
+              <button onclick="fillQuery('How do I submit an emergency SAR/GAR for satellite bandwidth?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-blue-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
+                <span>Submit SAR/GAR Request</span><span>→</span>
+              </button>
+              <button onclick="fillQuery('Where do I request tactical COMSEC crypto keys?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-blue-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
+                <span>Crypto / KMI Key Issuance</span><span>→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Desk 2: Cyber Defense & CSOC -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-red-500/80 transition shadow-md">
+            <div>
+              <div class="flex items-center justify-between text-red-400 mb-2">
+                <span class="font-bold text-xs font-mono bg-red-950/80 border border-red-800 px-2 py-0.5 rounded">CYBER / CSOC</span>
+                <span class="text-lg">🚨</span>
+              </div>
+              <h4 class="text-base font-bold text-white mb-1">Cyber Incident &amp; Spillage</h4>
+              <p class="text-xs text-slate-400 mb-4">Mandatory step-by-step procedures to isolate workstations, contain classified spills, and verify IAVM compliance.</p>
+            </div>
+            <div class="space-y-2 border-t border-slate-800 pt-3">
+              <button onclick="fillQuery('Who do I contact for classified spillage or cyber incident?')" class="w-full text-left bg-red-950/40 hover:bg-red-900/60 text-red-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-red-800/60 transition">
+                <span>Spill Containment Checklist</span><span>🚨</span>
+              </button>
+              <button onclick="fillQuery('What is the IAVM vulnerability remediation workflow?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-slate-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
+                <span>IAVM &amp; STIG Compliance</span><span>→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Desk 3: Network & Boundary -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-emerald-500/80 transition shadow-md">
+            <div>
+              <div class="flex items-center justify-between text-emerald-400 mb-2">
+                <span class="font-bold text-xs font-mono bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded">NETOPS / BOUNDARY</span>
+                <span class="text-lg">🌐</span>
+              </div>
+              <h4 class="text-base font-bold text-white mb-1">Accounts &amp; Firewalls</h4>
+              <p class="text-xs text-slate-400 mb-4">Onboard personnel onto SIPR/NIPR enclaves, request theater VPN access, and file PPSM firewall exemptions.</p>
+            </div>
+            <div class="space-y-2 border-t border-slate-800 pt-3">
+              <button onclick="fillQuery('Where do I request SIPRNet or NIPRNet account access?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-emerald-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
+                <span>SIPR/NIPR Account Onboarding</span><span>→</span>
+              </button>
+              <button onclick="fillQuery('How do I open a firewall port via PPSM?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-emerald-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
+                <span>PPSM Firewall Exemption</span><span>→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Desk 4: Governance, RMF & CUI -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-amber-500/80 transition shadow-md">
+            <div>
+              <div class="flex items-center justify-between text-amber-400 mb-2">
+                <span class="font-bold text-xs font-mono bg-amber-950/80 border border-amber-800 px-2 py-0.5 rounded">RMF &amp; GOVERNANCE</span>
+                <span class="text-lg">📋</span>
+              </div>
+              <h4 class="text-base font-bold text-white mb-1">RMF, ATO &amp; Staff Products</h4>
+              <p class="text-xs text-slate-400 mb-4">Register eMASS packages for ATO, verify CUI marking rules, and generate EXSUMs or Decision Papers.</p>
+            </div>
+            <div class="space-y-2 border-t border-slate-800 pt-3">
+              <button onclick="fillQuery('What are the steps to register an eMASS package for ATO?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-amber-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
+                <span>eMASS ATO Checklist</span><span>→</span>
+              </button>
+              <button onclick="switchTab('generator')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-amber-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
+                <span>Open Staff Product Generator</span><span>→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- IMMEDIATE OPERATIONAL CONTACTS & DESKS -->
+      <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-lg">
+        <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-300 mb-3 flex items-center space-x-2">
+          <span>📞</span>
+          <span>Immediate Theater Operational Desks (Unclassified Directory Reference)</span>
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+            <p class="text-blue-400 font-bold uppercase">24/7 G6 Operations Desk (DOC)</p>
+            <p class="text-white font-mono text-sm mt-1">DSN 314-537-1110</p>
+            <p class="text-slate-400 mt-1">Commercial: +49 (0)611-143-537-1110</p>
+            <p class="text-slate-500 mt-1">Use for: Tactical outage escalation, emergency SAR/GAR PINs, and frequency deconfliction.</p>
+          </div>
+          <div class="bg-slate-950 p-4 rounded-xl border border-red-900/50">
+            <p class="text-red-400 font-bold uppercase">Theater CSOC Emergency Line</p>
+            <p class="text-red-300 font-mono text-sm mt-1">DSN 314-537-9911</p>
+            <p class="text-slate-400 mt-1">Direct: +49 (0)611-143-537-9911</p>
+            <p class="text-slate-500 mt-1">Use for: Active network intrusions, unauthorized software, or classified spillages (30-min reporting window).</p>
+          </div>
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+            <p class="text-emerald-400 font-bold uppercase">AESD-Europe User Help Desk</p>
+            <p class="text-white font-mono text-sm mt-1">DSN 314-542-4357 (HELP)</p>
+            <p class="text-slate-400 mt-1">Toll-Free Europe: 00800-0000-4357</p>
+            <p class="text-slate-500 mt-1">Use for: SIPRNet/NIPRNet smartcard lockouts, Outlook access, DD 2875 onboarding, and ticketing.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: ALL 8 G6 DIVISIONS & SYSTEMS        -->
+    <!-- ========================================== -->
+    <div id="panel-divisions" class="hidden space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Directorate Organization</span>
+        <h2 class="text-2xl font-extrabold text-white mt-1">USAREUR-AF G6 Functional Divisions &amp; Unclassified Enclaves</h2>
+        <p class="text-sm text-slate-400 mt-1">Click any division action below to launch a tailored AI workflow assessment in the main guidance engine.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6" id="divisions-grid"></div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: STAFF PRODUCT & DOCUMENT GENERATOR  -->
+    <!-- ========================================== -->
+    <div id="panel-generator" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Standardized Staff Formats</span>
+          <h3 class="text-xl font-bold text-white">Generate G6 Staff Product</h3>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1" for="doc-type">Document Template</label>
+            <select id="doc-type" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+              <option value="exsum">Executive Summary (EXSUM)</option>
+              <option value="decision">Staff Decision Paper (AR 25-50)</option>
+              <option value="coa">COA Comparison Matrix</option>
+              <option value="ppsm">PPSM Firewall Exception Justification</option>
+              <option value="satcom">SATCOM SAR/GAR Concept of Operations</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1" for="doc-subject">Subject / Requirement Title</label>
+            <input id="doc-subject" type="text" placeholder="e.g., Theater Tactical Radio Modernization" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1" for="doc-unit">Originating Division / Unit</label>
+            <input id="doc-unit" type="text" placeholder="e.g., USAREUR-AF G6 Plans & Architecture" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1" for="doc-context">Key Facts &amp; Operational Impact</label>
+            <textarea id="doc-context" rows="4" placeholder="Enter suspense dates, technical dependencies, or resource constraints..." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white"></textarea>
+          </div>
+
+          <button onclick="generateStaffDoc()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-xs transition shadow">
+            Generate Formatted Draft →
+          </button>
+        </div>
+
+        <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+              <div>
+                <h3 class="text-base font-bold text-white">Formatted Staff Output (Unclassified)</h3>
+                <p class="text-xs text-slate-400">Ready to copy into NIPR email, Word, or eMASS package notes.</p>
+              </div>
+              <button onclick="copyStaffDoc()" id="copy-doc-btn" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 text-xs font-bold px-3 py-1.5 rounded-lg">
+                📋 Copy Draft
+              </button>
+            </div>
+            <pre id="doc-output" class="bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs text-slate-200 font-mono whitespace-pre-wrap min-h-[340px]">Select a template on the left and click "Generate Formatted Draft" to build a compliant G6 staff product.</pre>
           </div>
         </div>
       </div>
-    </aside>
-
-    <!-- Main Content Area -->
-    <div class="main-wrapper">
-      <!-- Top Header Bar -->
-      <header class="topbar">
-        <div class="topbar-left">
-          <button id="mobile-menu-btn" class="secondary mobile-only" type="button" aria-label="Toggle Menu">☰ Menu</button>
-          <div>
-            <h1 id="page-title" class="page-title">Enterprise Command Overview</h1>
-            <p class="page-subtitle">USAREUR-AF G6 Directorate · C4 Systems, Cyber Defense &amp; Decision Support</p>
-          </div>
-        </div>
-        <div class="topbar-right">
-          <span class="badge badge-green">● Prototype: ONLINE</span>
-          <button class="primary-btn" data-open-view="assistant" type="button">Launch AI Assistant →</button>
-        </div>
-      </header>
-
-      <main class="content-area">
-        <!-- VIEW 1: COMMAND OVERVIEW (DASHBOARD) -->
-        <section id="view-dashboard" class="view-section active">
-          <div class="hero-card">
-            <div>
-              <span class="eyebrow">UNIFIED G6 MISSION WORKSPACE</span>
-              <h2>How can the G6 Enterprise Portal support your staff action today?</h2>
-              <p>Access division workspaces, generate standardized staff products (EXSUMs, Decision Papers, COA matrices), and query the interactive G6 Workflow &amp; Guidance Engine.</p>
-              <div class="quick-chips">
-                <button class="chip" data-quick-query="How do I submit a SATCOM SAR/GAR request?" type="button">🛰️ SATCOM SAR/GAR</button>
-                <button class="chip" data-quick-query="What is the classified spillage response checklist?" type="button">🚨 Spillage Checklist</button>
-                <button class="chip" data-quick-query="How do I submit a PPSM firewall port exemption?" type="button">🛡️ PPSM Firewall Port</button>
-                <button class="chip" data-quick-query="What are the steps for an eMASS RMF ATO package?" type="button">📋 eMASS ATO Steps</button>
-                <button class="chip" data-quick-query="Draft an Executive Summary (EXSUM) template." type="button">📝 Draft EXSUM</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Metrics Summary Row -->
-          <div class="stats-grid">
-            <div class="stat-card">
-              <span class="stat-label">G6 Functional Divisions</span>
-              <strong class="stat-value">8 Active</strong>
-              <small class="stat-meta">NETOPS · Cyber · C4 · Enterprise · Plans · Gov · Data · ISD</small>
-            </div>
-            <div class="stat-card">
-              <span class="stat-label">Staff Product Templates</span>
-              <strong class="stat-value">6 Standardized</strong>
-              <small class="stat-meta">Triage · Decision Paper · Architecture · Board · EXSUM · COA</small>
-            </div>
-            <div class="stat-card">
-              <span class="stat-label">AI Operating Mode</span>
-              <strong class="stat-value">Client Mock Engine</strong>
-              <small class="stat-meta">Ready for FastAPI / OpenAI upgrade</small>
-            </div>
-            <div class="stat-card">
-              <span class="stat-label">Data Classification Scope</span>
-              <strong class="stat-value">Public / Unclass</strong>
-              <small class="stat-meta">No CUI, PII, PHI, or live network keys</small>
-            </div>
-          </div>
-
-          <!-- Preview of Department Workspaces -->
-          <div class="section-header">
-            <div>
-              <span class="eyebrow">DIRECTORATE STRUCTURE</span>
-              <h3>G6 Functional Divisions</h3>
-            </div>
-            <button class="secondary" data-open-view="workspaces" type="button">View All Details →</button>
-          </div>
-          <div id="dashboard-dept-grid" class="card-grid"></div>
-        </section>
-
-        <!-- VIEW 2: DEPARTMENT WORKSPACES -->
-        <section id="view-workspaces" class="view-section">
-          <div class="section-header">
-            <div>
-              <span class="eyebrow">G6 FUNCTIONAL AREAS</span>
-              <h2>Division Workspaces &amp; Unclassified Utilities</h2>
-              <p class="muted">Select any division below to load its tailored AI prompts, standard operating workflows, and staff tools.</p>
-            </div>
-          </div>
-          <div id="full-dept-grid" class="card-grid"></div>
-        </section>
-
-        <!-- VIEW 3: G6 AI CENTRAL ASSISTANT -->
-        <section id="view-assistant" class="view-section">
-          <div class="assistant-layout">
-            <div class="chat-panel">
-              <div class="chat-heading">
-                <div>
-                  <strong>G6 AI Central Assistant (Demonstration Mode)</strong>
-                  <small id="active-task-label">Mode: General G6 Staff &amp; Workflow Advisor</small>
-                </div>
-                <button id="clear-chat" class="secondary" type="button">New Conversation</button>
-              </div>
-
-              <div id="chat-history" class="chat-history" role="log" aria-live="polite">
-                <article class="message assistant">
-                  <strong>G6 Assistant</strong>
-                  <p>Welcome to the USAREUR-AF G6 AI Assistant prototype. Select a staff task on the right or ask a question about G6 workflows (SATCOM, Cyber/RMF, PPSM, COMSEC, Accounts, or Governance). All outputs are simulated for unclassified demonstration and require human review.</p>
-                </article>
-              </div>
-
-              <form id="chat-form" class="chat-form">
-                <label class="sr-only" for="question">Your question or requirement</label>
-                <textarea id="question" rows="3" maxlength="2000" placeholder="Ask a G6 workflow question or select a staff task prompt..." required></textarea>
-                <div class="composer-footer">
-                  <span id="status" role="status">Ready · Mock AI Demonstration Mode</span>
-                  <button id="send" class="primary-btn" type="submit">Ask G6 Assistant →</button>
-                </div>
-              </form>
-            </div>
-
-            <!-- Task Selector Sidebar -->
-            <div class="task-sidebar">
-              <span class="eyebrow">STAFF SUPPORT WORKFLOWS</span>
-              <h3>Select Staff Task</h3>
-              <p class="muted small-text">Click a task to pre-fill a structured staff prompt:</p>
-              <div class="task-list">
-                <button class="task-btn" data-task="triage" type="button">
-                  <strong>01 · IT Requirement Triage</strong>
-                  <span>Clarify operational needs, identify gaps, and route to the right G6 division.</span>
-                </button>
-                <button class="task-btn" data-task="decision" type="button">
-                  <strong>02 · Decision Paper</strong>
-                  <span>Draft standard staff decision paper with Issue, Facts, Assumptions, COAs, and Recommendation.</span>
-                </button>
-                <button class="task-btn" data-task="architecture" type="button">
-                  <strong>03 · Modernization &amp; Architecture</strong>
-                  <span>Assess technical alignment, dependencies, PPSM, and RMF review requirements.</span>
-                </button>
-                <button class="task-btn" data-task="governance" type="button">
-                  <strong>04 · Governance Board Prep</strong>
-                  <span>Prepare CCB/governance read-aheads, executive questions, and action items.</span>
-                </button>
-                <button class="task-btn" data-task="exsum" type="button">
-                  <strong>05 · Executive Summary (EXSUM)</strong>
-                  <span>Generate a concise BLUF, key facts, operational risks, and next actions.</span>
-                </button>
-                <button class="task-btn" data-task="coa" type="button">
-                  <strong>06 · COA Comparison</strong>
-                  <span>Compare feasible courses of action across risk, resourcing, and schedule.</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- VIEW 4: STAFF DOCUMENT GENERATOR -->
-        <section id="view-documents" class="view-section">
-          <div class="section-header">
-            <div>
-              <span class="eyebrow">STANDARDIZED TEMPLATES</span>
-              <h2>G6 Staff Product Generator</h2>
-              <p class="muted">Generate clean, copy-ready unclassified staff templates for immediate use.</p>
-            </div>
-          </div>
-          <div class="doc-layout">
-            <div class="panel">
-              <h3>Configure Document</h3>
-              <label class="field-label" for="doc-type">Template Type</label>
-              <select id="doc-type" class="input-field">
-                <option value="exsum">Executive Summary (EXSUM)</option>
-                <option value="decision">Staff Decision Paper</option>
-                <option value="ppsm">PPSM Firewall Exception Justification</option>
-                <option value="satcom">SATCOM SAR/GAR Concept of Operations</option>
-                <option value="spillage">Cyber Spillage Initial Triage Note (Unclassified)</option>
-              </select>
-
-              <label class="field-label" for="doc-subject">Subject / Requirement Title</label>
-              <input id="doc-subject" type="text" class="input-field" placeholder="e.g., Theater Tactical Radio Modernization Phase II">
-
-              <label class="field-label" for="doc-unit">Originating Division / Unit</label>
-              <input id="doc-unit" type="text" class="input-field" placeholder="e.g., G6 Plans &amp; Architecture">
-
-              <label class="field-label" for="doc-context">Key Facts / Operational Context</label>
-              <textarea id="doc-context" rows="4" class="input-field" placeholder="Enter key objectives, suspense dates, or technical constraints..."></textarea>
-
-              <button id="generate-doc-btn" class="primary-btn full-width" type="button">Generate Staff Draft →</button>
-            </div>
-
-            <div class="panel">
-              <div class="panel-header-inline">
-                <h3>Generated Output</h3>
-                <button id="copy-doc-btn" class="secondary" type="button">Copy Text</button>
-              </div>
-              <pre id="doc-output" class="code-output">Select a template on the left and click "Generate Staff Draft" to create a structured document.</pre>
-            </div>
-          </div>
-        </section>
-
-        <!-- VIEW 5: KNOWLEDGE CENTER -->
-        <section id="view-knowledge" class="view-section">
-          <div class="section-header">
-            <div>
-              <span class="eyebrow">REFERENCE LIBRARY</span>
-              <h2>G6 SOP &amp; Practical Workflow Directory</h2>
-              <p class="muted">Filter unclassified reference guides and standard processes across G6 divisions.</p>
-            </div>
-            <input id="kb-search" type="search" class="input-field search-box" placeholder="Filter workflows (e.g., SATCOM, RMF, PPSM, COMSEC)...">
-          </div>
-          <div id="kb-grid" class="card-grid"></div>
-        </section>
-
-        <!-- VIEW 6: ACTION TRACKER -->
-        <section id="view-tracker" class="view-section">
-          <div class="section-header">
-            <div>
-              <span class="eyebrow">GOVERNANCE &amp; TASKERS</span>
-              <h2>G6 Directorate Action &amp; Milestone Tracker</h2>
-              <p class="muted">Illustrative unclassified tracker for governance boards, architecture reviews, and staff packages.</p>
-            </div>
-          </div>
-          <div class="panel table-wrapper">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Action ID</th>
-                  <th>Division</th>
-                  <th>Requirement / Package</th>
-                  <th>Stage</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="tracker-tbody"></tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- VIEW 7: ABOUT & ARCHITECTURE -->
-        <section id="view-about" class="view-section">
-          <div class="panel">
-            <span class="eyebrow">PROTOTYPE GOVERNANCE</span>
-            <h2>System Architecture &amp; Security Scope</h2>
-            <p>This portal is an unclassified frontend demonstration built for GitHub Pages hosting. It provides a unified user experience across eight G6 functional areas using a local Mock AI response engine, with built-in support for connecting a Python/FastAPI backend when authorized.</p>
-            <div class="system-list">
-              <div class="system-row">
-                <strong>Hosting Environment</strong>
-                <span>GitHub Pages (Static HTML / CSS / JS with relative paths)</span>
-              </div>
-              <div class="system-row">
-                <strong>AI Operating Mode</strong>
-                <span>Client-Side Mock AI Engine (Configurable via <code>window.G6_API_URL</code>)</span>
-              </div>
-              <div class="system-row">
-                <strong>Authorized Data Scope</strong>
-                <span>UNCLASSIFIED — Public / Demonstration Information Only</span>
-              </div>
-              <div class="system-row">
-                <strong>Advisory Notice</strong>
-                <span>Does not exercise command, policy, acquisition, or cybersecurity authorization (ATO) authority.</span>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <span>USAREUR-AF G6 Enterprise Portal · Unclassified Prototype</span>
-        <span>Advisory Use Only · Human Review Required</span>
-      </footer>
     </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: VDI CLAUDE AI CONNECTION CONFIG     -->
+    <!-- ========================================== -->
+    <div id="panel-vdi" class="hidden space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-3xl mx-auto space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Hybrid Backend Integration</span>
+            <h2 class="text-xl font-extrabold text-white mt-1">VDI Python / Claude AI Endpoint Configuration</h2>
+          </div>
+          <span class="px-2.5 py-1 rounded text-xs font-mono bg-emerald-950 text-emerald-300 border border-emerald-800">Non-Disruptive Bridge</span>
+        </div>
+
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Your Python VDI Claude AI backend is completely separate from this static GitHub Pages frontend. By default, this portal uses the instant built-in G6 Knowledge Engine, and if you enter your Python FastAPI/Flask URL below, all search queries will route directly to your VDI AI backend first (with automatic fallback if your VDI session is offline).
+        </p>
+
+        <div class="space-y-2 pt-2">
+          <label class="block text-xs font-bold text-slate-300" for="vdi-api-url">Python Backend API Endpoint URL (Optional)</label>
+          <div class="flex gap-2">
+            <input id="vdi-api-url" type="url" placeholder="e.g., http://localhost:8000/api/chat or https://your-vdi-service.example.com/api/chat" class="flex-grow bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono">
+            <button onclick="saveVdiUrl()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-lg">
+              Save Endpoint
+            </button>
+          </div>
+          <p id="vdi-save-status" class="text-xs text-slate-400">Currently running in Local Sentinel-6 Knowledge Engine mode (No backend required).</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 border-t border-slate-800 text-slate-400 text-xs py-4 mt-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-2">
+      <div>
+        <span>USAREUR-AF G6 Enterprise Portal &amp; AI Staff Assistant</span>
+        <span class="mx-2">•</span>
+        <span>DoDI 8500.01 &amp; AR 25-2 Aligned Prototype</span>
+      </div>
+      <div class="text-slate-500">
+        Advisory Use Only • Verify Claims Against Official Command SOPs
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bottom Security Classification Banner -->
+  <div class="classification-banner">
+    UNCLASSIFIED // PUBLIC INFORMATION &amp; PROTOTYPE ENVIRONMENT
   </div>
-</body>
-</html>
+
+  <!-- SELF-CONTAINED G6 SENTINEL + VDI AI BRIDGE ENGINE -->
+  <script>
+    // Optional VDI Python Backend URL (stored in session if configured)
+    window.G6_API_URL = sessionStorage.getItem("G6_API_URL") || "";
+
+    const g6KnowledgeBase = [
+      {
+        keywords: ["satcom", "sar", "gar", "satellite", "bandwidth", "wgs", "muos", "step", "radio"],
+        branch: "G6 C4 Operations (Tactical SATCOM)",
+        answer: "<strong>Practical Steps to Request SATCOM:<
