@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="USAREUR-AF G6 Enterprise Information and Staff Support Prototype">
+  <meta name="theme-color" content="#0b1423">
+  <title>USAREUR-AF G6 | Enterprise Portal</title>
+  <link rel="stylesheet" href="./assets/styles.css">
+  <script src="./assets/app.js" defer></script>
+</head>
+<body>
+  <!-- Top Unclassified Banner -->
+  <div class="security-banner">
+    UNCLASSIFIED — PUBLIC INFORMATION ONLY · PROTOTYPE ENVIRONMENT
+  </div>
+
+  <div class="app-shell">
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="./" data-nav="dashboard">
+        <span class="brand-logo">G6</span>
+        <span>
+          <strong>G6 ENTERPRISE</strong>
+          <small>Information &amp; Staff Portal</small>
+        </span>
+      </a>
+
+      <div class="sidebar-label">MISSION WORKSPACE</div>
+      <nav class="navigation" aria-label="Main navigation">
+        <button class="nav-link active" data-nav="dashboard" type="button">
+          <span>▦</span> Command Overview
+        </button>
+        <button class="nav-link" data-nav="workspaces" type="button">
+          <span>▤</span> G6 Divisions (8)
+        </button>
+        <button class="nav-link" data-nav="assistant" type="button">
+          <span>✧</span> G6 AI Assistant
+          <span class="nav-tag">MOCK AI</span>
+        </button>
+
+        <div class="sidebar-label">ENTERPRISE UTILITIES</div>
+        <button class="nav-link" data-nav="documents" type="button">
+          <span>▧</span> Staff Product Generator
+        </button>
+        <button class="nav-link" data-nav="knowledge" type="button">
+          <span>⌕</span> SOP &amp; Knowledge Base
+        </button>
+        <button class="nav-link" data-nav="tracker" type="button">
+          <span>☷</span> Governance &amp; Action Tracker
+        </button>
+
+        <div class="sidebar-label">SYSTEM INFO</div>
+        <button class="nav-link" data-nav="about" type="button">
+          <span>ⓘ</span> Architecture &amp; Scope
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="demo-card">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Mock AI Engine Active</strong>
+            <small>Local demonstration mode · No API key required</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+      <!-- Top Header Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="mobile-menu-btn" class="secondary mobile-only" type="button" aria-label="Toggle Menu">☰ Menu</button>
+          <div>
+            <h1 id="page-title" class="page-title">Enterprise Command Overview</h1>
+            <p class="page-subtitle">USAREUR-AF G6 Directorate · C4 Systems, Cyber Defense &amp; Decision Support</p>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <span class="badge badge-green">● Prototype: ONLINE</span>
+          <button class="primary-btn" data-open-view="assistant" type="button">Launch AI Assistant →</button>
+        </div>
+      </header>
+
+      <main class="content-area">
+        <!-- VIEW 1: COMMAND OVERVIEW (DASHBOARD) -->
+        <section id="view-dashboard" class="view-section active">
+          <div class="hero-card">
+            <div>
+              <span class="eyebrow">UNIFIED G6 MISSION WORKSPACE</span>
+              <h2>How can the G6 Enterprise Portal support your staff action today?</h2>
+              <p>Access division workspaces, generate standardized staff products (EXSUMs, Decision Papers, COA matrices), and query the interactive G6 Workflow &amp; Guidance Engine.</p>
+              <div class="quick-chips">
+                <button class="chip" data-quick-query="How do I submit a SATCOM SAR/GAR request?" type="button">🛰️ SATCOM SAR/GAR</button>
+                <button class="chip" data-quick-query="What is the classified spillage response checklist?" type="button">🚨 Spillage Checklist</button>
+                <button class="chip" data-quick-query="How do I submit a PPSM firewall port exemption?" type="button">🛡️ PPSM Firewall Port</button>
+                <button class="chip" data-quick-query="What are the steps for an eMASS RMF ATO package?" type="button">📋 eMASS ATO Steps</button>
+                <button class="chip" data-quick-query="Draft an Executive Summary (EXSUM) template." type="button">📝 Draft EXSUM</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metrics Summary Row -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-label">G6 Functional Divisions</span>
+              <strong class="stat-value">8 Active</strong>
+              <small class="stat-meta">NETOPS · Cyber · C4 · Enterprise · Plans · Gov · Data · ISD</small>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Staff Product Templates</span>
+              <strong class="stat-value">6 Standardized</strong>
+              <small class="stat-meta">Triage · Decision Paper · Architecture · Board · EXSUM · COA</small>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">AI Operating Mode</span>
+              <strong class="stat-value">Client Mock Engine</strong>
+              <small class="stat-meta">Ready for FastAPI / OpenAI upgrade</small>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">Data Classification Scope</span>
+              <strong class="stat-value">Public / Unclass</strong>
+              <small class="stat-meta">No CUI, PII, PHI, or live network keys</small>
+            </div>
+          </div>
+
+          <!-- Preview of Department Workspaces -->
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">DIRECTORATE STRUCTURE</span>
+              <h3>G6 Functional Divisions</h3>
+            </div>
+            <button class="secondary" data-open-view="workspaces" type="button">View All Details →</button>
+          </div>
+          <div id="dashboard-dept-grid" class="card-grid"></div>
+        </section>
+
+        <!-- VIEW 2: DEPARTMENT WORKSPACES -->
+        <section id="view-workspaces" class="view-section">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">G6 FUNCTIONAL AREAS</span>
+              <h2>Division Workspaces &amp; Unclassified Utilities</h2>
+              <p class="muted">Select any division below to load its tailored AI prompts, standard operating workflows, and staff tools.</p>
+            </div>
+          </div>
+          <div id="full-dept-grid" class="card-grid"></div>
+        </section>
+
+        <!-- VIEW 3: G6 AI CENTRAL ASSISTANT -->
+        <section id="view-assistant" class="view-section">
+          <div class="assistant-layout">
+            <div class="chat-panel">
+              <div class="chat-heading">
+                <div>
+                  <strong>G6 AI Central Assistant (Demonstration Mode)</strong>
+                  <small id="active-task-label">Mode: General G6 Staff &amp; Workflow Advisor</small>
+                </div>
+                <button id="clear-chat" class="secondary" type="button">New Conversation</button>
+              </div>
+
+              <div id="chat-history" class="chat-history" role="log" aria-live="polite">
+                <article class="message assistant">
+                  <strong>G6 Assistant</strong>
+                  <p>Welcome to the USAREUR-AF G6 AI Assistant prototype. Select a staff task on the right or ask a question about G6 workflows (SATCOM, Cyber/RMF, PPSM, COMSEC, Accounts, or Governance). All outputs are simulated for unclassified demonstration and require human review.</p>
+                </article>
+              </div>
+
+              <form id="chat-form" class="chat-form">
+                <label class="sr-only" for="question">Your question or requirement</label>
+                <textarea id="question" rows="3" maxlength="2000" placeholder="Ask a G6 workflow question or select a staff task prompt..." required></textarea>
+                <div class="composer-footer">
+                  <span id="status" role="status">Ready · Mock AI Demonstration Mode</span>
+                  <button id="send" class="primary-btn" type="submit">Ask G6 Assistant →</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Task Selector Sidebar -->
+            <div class="task-sidebar">
+              <span class="eyebrow">STAFF SUPPORT WORKFLOWS</span>
+              <h3>Select Staff Task</h3>
+              <p class="muted small-text">Click a task to pre-fill a structured staff prompt:</p>
+              <div class="task-list">
+                <button class="task-btn" data-task="triage" type="button">
+                  <strong>01 · IT Requirement Triage</strong>
+                  <span>Clarify operational needs, identify gaps, and route to the right G6 division.</span>
+                </button>
+                <button class="task-btn" data-task="decision" type="button">
+                  <strong>02 · Decision Paper</strong>
+                  <span>Draft standard staff decision paper with Issue, Facts, Assumptions, COAs, and Recommendation.</span>
+                </button>
+                <button class="task-btn" data-task="architecture" type="button">
+                  <strong>03 · Modernization &amp; Architecture</strong>
+                  <span>Assess technical alignment, dependencies, PPSM, and RMF review requirements.</span>
+                </button>
+                <button class="task-btn" data-task="governance" type="button">
+                  <strong>04 · Governance Board Prep</strong>
+                  <span>Prepare CCB/governance read-aheads, executive questions, and action items.</span>
+                </button>
+                <button class="task-btn" data-task="exsum" type="button">
+                  <strong>05 · Executive Summary (EXSUM)</strong>
+                  <span>Generate a concise BLUF, key facts, operational risks, and next actions.</span>
+                </button>
+                <button class="task-btn" data-task="coa" type="button">
+                  <strong>06 · COA Comparison</strong>
+                  <span>Compare feasible courses of action across risk, resourcing, and schedule.</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 4: STAFF DOCUMENT GENERATOR -->
+        <section id="view-documents" class="view-section">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">STANDARDIZED TEMPLATES</span>
+              <h2>G6 Staff Product Generator</h2>
+              <p class="muted">Generate clean, copy-ready unclassified staff templates for immediate use.</p>
+            </div>
+          </div>
+          <div class="doc-layout">
+            <div class="panel">
+              <h3>Configure Document</h3>
+              <label class="field-label" for="doc-type">Template Type</label>
+              <select id="doc-type" class="input-field">
+                <option value="exsum">Executive Summary (EXSUM)</option>
+                <option value="decision">Staff Decision Paper</option>
+                <option value="ppsm">PPSM Firewall Exception Justification</option>
+                <option value="satcom">SATCOM SAR/GAR Concept of Operations</option>
+                <option value="spillage">Cyber Spillage Initial Triage Note (Unclassified)</option>
+              </select>
+
+              <label class="field-label" for="doc-subject">Subject / Requirement Title</label>
+              <input id="doc-subject" type="text" class="input-field" placeholder="e.g., Theater Tactical Radio Modernization Phase II">
+
+              <label class="field-label" for="doc-unit">Originating Division / Unit</label>
+              <input id="doc-unit" type="text" class="input-field" placeholder="e.g., G6 Plans &amp; Architecture">
+
+              <label class="field-label" for="doc-context">Key Facts / Operational Context</label>
+              <textarea id="doc-context" rows="4" class="input-field" placeholder="Enter key objectives, suspense dates, or technical constraints..."></textarea>
+
+              <button id="generate-doc-btn" class="primary-btn full-width" type="button">Generate Staff Draft →</button>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header-inline">
+                <h3>Generated Output</h3>
+                <button id="copy-doc-btn" class="secondary" type="button">Copy Text</button>
+              </div>
+              <pre id="doc-output" class="code-output">Select a template on the left and click "Generate Staff Draft" to create a structured document.</pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 5: KNOWLEDGE CENTER -->
+        <section id="view-knowledge" class="view-section">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">REFERENCE LIBRARY</span>
+              <h2>G6 SOP &amp; Practical Workflow Directory</h2>
+              <p class="muted">Filter unclassified reference guides and standard processes across G6 divisions.</p>
+            </div>
+            <input id="kb-search" type="search" class="input-field search-box" placeholder="Filter workflows (e.g., SATCOM, RMF, PPSM, COMSEC)...">
+          </div>
+          <div id="kb-grid" class="card-grid"></div>
+        </section>
+
+        <!-- VIEW 6: ACTION TRACKER -->
+        <section id="view-tracker" class="view-section">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow">GOVERNANCE &amp; TASKERS</span>
+              <h2>G6 Directorate Action &amp; Milestone Tracker</h2>
+              <p class="muted">Illustrative unclassified tracker for governance boards, architecture reviews, and staff packages.</p>
+            </div>
+          </div>
+          <div class="panel table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Action ID</th>
+                  <th>Division</th>
+                  <th>Requirement / Package</th>
+                  <th>Stage</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tracker-tbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- VIEW 7: ABOUT & ARCHITECTURE -->
+        <section id="view-about" class="view-section">
+          <div class="panel">
+            <span class="eyebrow">PROTOTYPE GOVERNANCE</span>
+            <h2>System Architecture &amp; Security Scope</h2>
+            <p>This portal is an unclassified frontend demonstration built for GitHub Pages hosting. It provides a unified user experience across eight G6 functional areas using a local Mock AI response engine, with built-in support for connecting a Python/FastAPI backend when authorized.</p>
+            <div class="system-list">
+              <div class="system-row">
+                <strong>Hosting Environment</strong>
+                <span>GitHub Pages (Static HTML / CSS / JS with relative paths)</span>
+              </div>
+              <div class="system-row">
+                <strong>AI Operating Mode</strong>
+                <span>Client-Side Mock AI Engine (Configurable via <code>window.G6_API_URL</code>)</span>
+              </div>
+              <div class="system-row">
+                <strong>Authorized Data Scope</strong>
+                <span>UNCLASSIFIED — Public / Demonstration Information Only</span>
+              </div>
+              <div class="system-row">
+                <strong>Advisory Notice</strong>
+                <span>Does not exercise command, policy, acquisition, or cybersecurity authorization (ATO) authority.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>USAREUR-AF G6 Enterprise Portal · Unclassified Prototype</span>
+        <span>Advisory Use Only · Human Review Required</span>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
