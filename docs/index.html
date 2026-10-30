@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI-powered information and staff-support prototype">
+  <title>G6 AI Information Assistant</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <div class="notice">
+    PUBLIC INFORMATION ASSISTANT · PROTOTYPE
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="G6 Assistant home">
+      <span class="brand-mark">G6</span>
+      <span>
+        <strong>AI Information Assistant</strong>
+        <small>Information · Analysis · Staff Support</small>
+      </span>
+    </a>
+    <span class="status"><span></span> Advisory mode</span>
+  </header>
+
+  <main class="layout">
+    <section class="welcome">
+      <p class="eyebrow">YOUR AI STAFF ASSISTANT</p>
+      <h1>How can I help you move forward?</h1>
+      <p class="intro">
+        Ask a question, explain a requirement, or request a staff product.
+        I'll search available approved references, explain what is known,
+        identify gaps, and recommend practical next steps.
+      </p>
+
+      <div class="chat-panel">
+        <div class="chat-heading">
+          <div>
+            <strong>Ask the assistant</strong>
+            <small>Use public, non-sensitive information only.</small>
+          </div>
+          <button id="clear-chat" class="secondary" type="button">
+            New chat
+          </button>
+        </div>
+
+        <div id="chat-history" class="chat-history" role="log"
+             aria-live="polite" aria-relevant="additions">
+          <article class="message assistant">
+            <strong>G6 Assistant</strong>
+            <p>
+              Welcome. Tell me what you're trying to accomplish.
+              I can help research questions, structure requirements,
+              compare options, and draft staff products. My responses
+              are advisory and require human review.
+            </p>
+          </article>
+        </div>
+
+        <form id="chat-form">
+          <label class="sr-only" for="question">Your question</label>
+          <textarea id="question" maxlength="2000" rows="3"
+            placeholder="Describe your question or requirement..."
+            required></textarea>
+          <div class="composer-footer">
+            <span id="status" role="status">
+              Ready · Sources shown when available
+            </span>
+            <button id="send" type="submit">Ask assistant →</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="tasks">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">GET STARTED</p>
+          <h2>What do you need help with?</h2>
+        </div>
+      </div>
+
+      <div class="task-grid">
+        <button class="task-card" data-task="triage" type="button">
+          <span class="task-icon blue">01</span>
+          <strong>IT requirement triage</strong>
+          <span>Clarify needs, identify gaps, and suggest routing.</span>
+          <span class="task-link">Start task →</span>
+        </button>
+
+        <button class="task-card" data-task="decision" type="button">
+          <span class="task-icon purple">02</span>
+          <strong>Decision paper</strong>
+          <span>Structure facts, COAs, risks, and recommendations.</span>
+          <span class="task-link">Start task →</span>
+        </button>
+
+        <button class="task-card" data-task="architecture" type="button">
+          <span class="task-icon green">03</span>
+          <strong>Modernization review</strong>
+          <span>Assess dependencies, alignment, and review needs.</span>
+          <span class="task-link">Start task →</span>
+        </button>
+
+        <button class="task-card" data-task="governance" type="button">
+          <span class="task-icon amber">04</span>
+          <strong>Governance preparation</strong>
+          <span>Prepare read-aheads, questions, and action trackers.</span>
+          <span class="task-link">Start task →</span>
+        </button>
+
+        <button class="task-card" data-task="exsum" type="button">
+          <span class="task-icon blue">05</span>
+          <strong>Executive summary</strong>
+          <span>Turn supplied facts into a concise staff summary.</span>
+          <span class="task-link">Start task →</span>
+        </button>
+
+        <button class="task-card" data-task="coa" type="button">
+          <span class="task-icon purple">06</span>
+          <strong>Compare courses of action</strong>
+          <span>Compare benefits, costs, feasibility, and risk.</span>
+          <span class="task-link">Start task →</span>
+        </button>
+      </div>
+    </section>
+
+    <aside class="disclaimer">
+      <strong>Advisory use only</strong>
+      <p>
+        This prototype does not exercise command or approval authority.
+        It does not make official policy, legal, acquisition, funding,
+        classification, or cybersecurity authorization decisions.
+        Verify important claims against authoritative sources and
+        obtain required human approvals.
+      </p>
+    </aside>
+  </main>
+
+  <footer>
+    G6 AI Information Assistant · Prototype · Not an official
+    USAREUR-AF system
+  </footer>
+</body>
+</html>
