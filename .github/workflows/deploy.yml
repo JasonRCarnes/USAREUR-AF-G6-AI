@@ -36,35 +36,33 @@ jobs:
           echo "================================"
           echo "Current directory: $(pwd)"
           echo ""
-          echo "Repository file structure:"
-          find . -maxdepth 3 -not -path '*/.*'
-          echo ""
 
-          # Search for index.html while avoiding hidden git files
+          # Locate index.html anywhere in the repository
           HTML_PATH=$(find . -not -path "*/.*" -name "index.html" | head -n 1)
 
           if [ -n "$HTML_PATH" ]; then
-            echo "SUCCESS: index.html found at $HTML_PATH"
-            # Extract folder location of index.html
+            echo "SUCCESS: Found index.html at $HTML_PATH"
+            # Get the exact folder where index.html resides
             SRC_DIR=$(dirname "$HTML_PATH")
-            echo "Source directory is: $SRC_DIR"
+            echo "Source assets will be copied from: $SRC_DIR"
             
-            # Create staging folder safely in /tmp to prevent "directory copying into itself"
+            # Create a clean staging directory in /tmp
             rm -rf /tmp/_site
             mkdir -p /tmp/_site
             
-            # Copy files to temporary folder
-            cp -r "$SRC_DIR"/* /tmp/_site/
+            # Copy ONLY the contents of the directory, not the directory itself
+            # This places index.html exactly at the root of the staging folder
+            cp -RL "$SRC_DIR"/* /tmp/_site/
             
-            # Remove any nested _site folder if it was copied accidentally
+            # Safety cleaning of temporary files
             rm -rf /tmp/_site/_site
             
-            # Bring staged directory back to workspace
+            # Move the clean, flattened site to the workspace
             rm -rf _site
             mv /tmp/_site _site
             
             echo ""
-            echo "Staged files ready for upload:"
+            echo "Staged files ready for upload (index.html MUST be listed here):"
             ls -la _site
           else
             echo "ERROR: index.html is missing from the repository."
