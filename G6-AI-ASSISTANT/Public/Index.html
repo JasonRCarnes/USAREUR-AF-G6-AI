@@ -421,4 +421,226 @@
       {
         keywords: ["satcom", "sar", "gar", "satellite", "bandwidth", "wgs", "muos", "step", "radio"],
         branch: "G6 C4 Operations (Tactical SATCOM)",
-        answer: "<strong>Practical Steps to Request SATCOM:<
+        answer: "<strong>Practical Steps to Request SATCOM:</strong><br>1. Submit a Satellite Access Request (SAR) via the Joint Integrated SATCOM Tool (JIST) at least 30 days prior to mission start.<br>2. For short-notice missions (&lt;72 hours), call the 24/7 G6 Operations Desk to obtain a verbal operational PIN, followed by an immediate emergency SAR upload.<br>3. Obtain your Gateway Access Authorization (GAA) from the Landstuhl or Patch Barracks STEP site prior to terminal bring-up.",
+        poc: "DSN: 314-537-1110 | satcom.usareur@army.mil"
+      },
+      {
+        keywords: ["spill", "spillage", "classified", "incident", "breach", "compromise", "hack", "virus", "malware", "csoc"],
+        branch: "Theater CSOC / Cyber Incident Desk",
+        answer: "<strong>IMMEDIATE ACTION PLAN (Classified Spillage / Cyber Incident):</strong><br>1. <strong>Do NOT power down or reboot</strong> the computer (preserves volatile memory forensics).<br>2. <strong>Physically disconnect</strong> the ethernet cable and disable Wi-Fi/Bluetooth toggles.<br>3. Quarantine the room or machine to prevent unauthorized viewing.<br>4. Call the CSOC Emergency Line at <strong>DSN 314-537-9911</strong> within 30 minutes per CJCSI 6510.01.<br>5. Complete DA Form 5248-R / Incident Worksheet provided by your ISSM and CSOC responder.",
+        poc: "EMERGENCY LINE: DSN 314-537-9911"
+      },
+      {
+        keywords: ["firewall", "port", "ppsm", "protocol", "exemption", "block", "acl", "traffic", "boundary"],
+        branch: "G6 Networks & Boundary Management",
+        answer: "<strong>How to Request a Firewall Exemption (PPSM):</strong><br>1. Verify whether the port and protocol are listed in the DISA PPSM Category Assurance List (CAL).<br>2. Complete the USAREUR-AF PPSM Exemption Worksheet specifying source/destination IP, subnet, port, and operational justification.<br>3. Obtain cybersecurity endorsement from your unit ISSM and S6/G6 (O-5 or above).<br>4. Submit the package to G6 Networks Boundary Management (standard turnaround: 5–7 business days).",
+        poc: "DSN: 314-537-2240 | ppsm.usareur@army.mil"
+      },
+      {
+        keywords: ["account", "password", "token", "nipr", "sipr", "cac", "pki", "reset", "aesd", "2875"],
+        branch: "Enterprise Service Desk (AESD-Europe)",
+        answer: "<strong>Practical Account Setup &amp; Resets:</strong><br>1. <strong>Password / PIN Lockout:</strong> Contact AESD-Europe at DSN 314-542-4357.<br>2. <strong>New SIPRNet Token:</strong> Submit a DD Form 2875 (SAAR) signed by your supervisor and security manager (confirming Secret clearance verification in DISS).<br>3. <strong>Cyber Awareness Requirement:</strong> Attach a current DoD Cyber Awareness Challenge certificate dated within the last 365 days.",
+        poc: "DSN: 314-542-4357 (HELP) | AESD-Europe"
+      },
+      {
+        keywords: ["comsec", "kmi", "crypto", "key", "skl", "pyq-10", "cipher", "vault", "1687"],
+        branch: "Theater COMSEC Management Office (TCMO)",
+        answer: "<strong>Requesting Cryptographic Material:</strong><br>1. Ensure your unit COMSEC account custodian is formally appointed on DA Form 1687.<br>2. Submit key transfer orders via the Key Management Infrastructure (KMI) Client at least 14 days prior to exercise lock.<br>3. Emergency fills for SKL (AN/PYQ-10) devices must be conducted in person at the COMSEC vault enforcing Two-Person Integrity (TPI).",
+        poc: "DSN: 314-537-1115 | comsec.usareur@army.mil"
+      },
+      {
+        keywords: ["rmf", "ato", "emass", "authorization", "package", "security control", "stig", "iavm"],
+        branch: "G6 Information Assurance / RMF Compliance",
+        answer: "<strong>Practical Path to System ATO (Authority to Operate):</strong><br>1. Register system package in Army eMASS under the USAREUR-AF hierarchy.<br>2. Implement and validate applicable DISA STIGs and IAVMs; upload SCAP and Nessus scan results.<br>3. Coordinate with your Information System Security Manager (ISSM) for control inheritance and POA&amp;M review.<br>4. Submit package through the Security Control Assessor (SCA) for Authorizing Official (AO) decision.",
+        poc: "DSN: 314-537-3315 | rmf.usareur@army.mil"
+      },
+      {
+        keywords: ["cui", "marking", "unclassified", "controlled", "distribution", "exsum", "decision"],
+        branch: "G6 Governance, OPSEC & Staff Support",
+        answer: "<strong>CUI Marking &amp; Staff Product Standards:</strong><br>• <strong>Header &amp; Footer:</strong> Bold, centered: <code>CUI</code> or <code>CONTROLLED UNCLASSIFIED INFORMATION</code> on authorized networks.<br>• <strong>Staff Products:</strong> Use the <em>Staff Document Generator</em> tab above to build formatted EXSUMs, Decision Papers, and COA matrices.<br>• <strong>Public Prototypes:</strong> Keep all public GitHub Pages portals strictly <code>UNCLASSIFIED</code> with no real CUI or PII.",
+        poc: "DSN: 314-537-4400 | governance.usareur@army.mil"
+      }
+    ];
+
+    const g6Divisions = [
+      { code: "NETOPS", name: "Network Operations (DODIN-A)", desc: "Theater transport monitoring, ASI maintenance windows, and outage escalation.", query: "How do I escalate a tactical network outage or check maintenance windows?" },
+      { code: "CYBER / CSOC", name: "Cybersecurity & RMF Division", desc: "24/7 cyber defense, spillage containment, eMASS ATO packages, and IAVM compliance.", query: "What are the steps to register an eMASS package for ATO?" },
+      { code: "C4 / TACTICAL", name: "Tactical Comms & SATCOM", desc: "SAR/GAR satellite bandwidth, LMR talkgroups, and tactical radio frequency deconfliction.", query: "How do I submit an emergency SAR/GAR for satellite bandwidth?" },
+      { code: "COMSEC / KMI", name: "Theater COMSEC (TCMO)", desc: "Cryptographic key issuance, KMI account management, and SKL fill scheduling.", query: "Where do I request tactical COMSEC crypto keys?" },
+      { code: "BOUNDARY", name: "Enterprise & Firewall (PPSM)", desc: "DISA CAL verification, firewall port exemptions, and enclave boundary defense.", query: "How do I open a firewall port via PPSM?" },
+      { code: "PLANS & ARCH", name: "Plans, Architecture & Coalition", desc: "C4ISR modernization alignment, NATO/Mission Partner interoperability, and technical reviews.", query: "How do I request a G6 architecture and modernization alignment review?" },
+      { code: "GOVERNANCE", name: "IT Governance & Resources", desc: "Configuration Control Boards (CCB), IT investments, Decision Papers, and EXSUMs.", query: "How do I prepare a G6 Governance Board or CCB decision package?" },
+      { code: "SERVICE DESK", name: "AESD & User Onboarding", desc: "NIPR/SIPR DD Form 2875 accounts, smartcard unlocks, and VIP communications support.", query: "Where do I request SIPRNet or NIPRNet account access?" }
+    ];
+
+    function switchTab(tabName) {
+      ["overview", "divisions", "generator", "vdi"].forEach(id => {
+        document.getElementById(`panel-${id}`).classList.toggle("hidden", id !== tabName);
+        document.getElementById(`tab-${id}`).classList.toggle("active", id === tabName);
+      });
+    }
+
+    function fillQuery(text) {
+      switchTab("overview");
+      const input = document.getElementById("ai-query-input");
+      input.value = text;
+      handleUserQuery();
+    }
+
+    function clearConversation() {
+      document.getElementById("chat-history").innerHTML = "";
+      document.getElementById("ai-response-container").classList.add("hidden");
+    }
+
+    async function handleUserQuery() {
+      const inputEl = document.getElementById("ai-query-input");
+      const rawQuery = inputEl.value.trim();
+      if (!rawQuery) return;
+
+      const container = document.getElementById("ai-response-container");
+      const historyEl = document.getElementById("chat-history");
+      const actionButtons = document.getElementById("ai-action-buttons");
+      const badge = document.getElementById("response-badge");
+
+      container.classList.remove("hidden");
+
+      // Append User Message
+      const userBubble = document.createElement("div");
+      userBubble.className = "chat-bubble-user rounded-xl p-3.5 text-xs text-slate-100 ml-auto max-w-2xl";
+      userBubble.innerHTML = `<div class="font-bold text-blue-300 mb-1">You</div><div>${rawQuery.replace(/</g, "&lt;")}</div>`;
+      historyEl.appendChild(userBubble);
+
+      inputEl.value = "";
+
+      // Check if VDI Python Backend is configured
+      if (window.G6_API_URL) {
+        badge.textContent = "Querying VDI AI Backend...";
+        try {
+          const res = await fetch(window.G6_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question: rawQuery, history: [], task: "auto" })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            appendAiResponse(data.answer || "Response received from VDI AI.", "VDI Claude AI Backend", "Check authoritative G6 SOPs");
+            return;
+          }
+        } catch (e) {
+          console.warn("VDI Backend unreachable, using local Sentinel-6 engine:", e);
+        }
+      }
+
+      // Local Sentinel-6 Match
+      const q = rawQuery.toLowerCase();
+      let match = null;
+      let highestScore = 0;
+
+      g6KnowledgeBase.forEach(item => {
+        let score = 0;
+        item.keywords.forEach(kw => {
+          if (q.includes(kw)) score += 1;
+        });
+        if (score > highestScore) {
+          highestScore = score;
+          match = item;
+        }
+      });
+
+      if (match && highestScore > 0) {
+        badge.textContent = match.branch;
+        appendAiResponse(match.answer, match.branch, match.poc);
+      } else {
+        badge.textContent = "G6 General Staff Triage";
+        appendAiResponse(
+          `<strong>G6 Triage Assessment for:</strong> "${rawQuery.replace(/</g, "&lt;")}"<br>1. <strong>Mission &amp; Tactical Comms:</strong> Contact the 24/7 G6 Operations Desk at <strong>DSN 314-537-1110</strong>.<br>2. <strong>Account, Token, or Workstation Support:</strong> Contact AESD-Europe at <strong>DSN 314-542-4357</strong>.<br>3. <strong>Cyber Incident or Spillage:</strong> Call Theater CSOC immediately at <strong>DSN 314-537-9911</strong>.<br>4. Need a formal staff package? Open the <strong>Staff Document Generator</strong> tab above.`,
+          "G6 Staff Triage Engine",
+          "24/7 G6 DOC: DSN 314-537-1110"
+        );
+      }
+
+      actionButtons.innerHTML = `
+        <span class="text-slate-400">Advisory response • Verify critical procedures against official USAREUR-AF G6 SOPs</span>
+        <button onclick="switchTab('generator')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-1.5 px-3 rounded-lg">
+          Open Staff Document Generator →
+        </button>
+      `;
+    }
+
+    function appendAiResponse(htmlContent, branchTitle, pocText) {
+      const historyEl = document.getElementById("chat-history");
+      const aiBubble = document.createElement("div");
+      aiBubble.className = "chat-bubble-ai rounded-xl p-4 text-xs text-slate-200 space-y-2 shadow";
+      aiBubble.innerHTML = `
+        <div class="font-bold text-blue-400 uppercase tracking-wide">${branchTitle}</div>
+        <div class="leading-relaxed">${htmlContent}</div>
+        <div class="text-[11px] font-mono text-slate-300 bg-slate-950/90 p-2 rounded border border-slate-800">
+          <strong>Direct Desk / Reference:</strong> ${pocText}
+        </div>
+      `;
+      historyEl.appendChild(aiBubble);
+      historyEl.scrollTop = historyEl.scrollHeight;
+    }
+
+    function generateStaffDoc() {
+      const type = document.getElementById("doc-type").value;
+      const subject = document.getElementById("doc-subject").value.trim() || "[INSERT REQUIREMENT SUBJECT]";
+      const unit = document.getElementById("doc-unit").value.trim() || "USAREUR-AF G6";
+      const context = document.getElementById("doc-context").value.trim() || "Key operational facts, milestones, and technical constraints.";
+      const dateStr = new Date().toISOString().slice(0, 10);
+
+      const templates = {
+        exsum: `UNCLASSIFIED // PUBLIC PROTOTYPE DRAFT\nDATE: ${dateStr}\nORIGINATOR: ${unit}\nSUBJECT: EXECUTIVE SUMMARY (EXSUM) — ${subject}\n\n1. BOTTOM LINE UP FRONT (BLUF):\n   Command awareness and decision summary regarding ${subject}.\n\n2. KEY FACTS & OPERATIONAL CONTEXT:\n   ${context}\n\n3. CYBERSECURITY & ARCHITECTURE ALIGNMENT:\n   • RMF / eMASS: Verify system authorization boundary and STIG compliance.\n   • Boundary / PPSM: Validate required ports and protocols against DISA CAL.\n\n4. NEXT ACTIONS:\n   • Complete G6 division coordination across NETOPS, Cyber, and Plans.\n   • Present final package to the G6 Configuration Control Board (CCB).`,
+        decision: `UNCLASSIFIED // PUBLIC PROTOTYPE DRAFT\nDATE: ${dateStr}\nORIGINATOR: ${unit}\nSUBJECT: DECISION PAPER — ${subject}\n\n1. PURPOSE:\n   To obtain leadership decision regarding ${subject}.\n\n2. FACTS BEARING ON THE PROBLEM:\n   ${context}\n\n3. COURSES OF ACTION (COAs):\n   • COA 1 (Status Quo): Maintain baseline; incurs operational sustainment risk.\n   • COA 2 (Phased Modernization - RECOMMENDED): Meets mission timeline with full RMF compliance.\n\n4. RECOMMENDATION:\n   Approve COA 2 and task G6 functional divisions for execution.`,
+        coa: `UNCLASSIFIED // PUBLIC PROTOTYPE DRAFT\nCOA COMPARISON MATRIX — ${subject}\nORIGINATOR: ${unit} | DATE: ${dateStr}\n\nCONTEXT: ${context}\n\n• COA 1 (Baseline): Low Cost | High Technical Risk | No new eMASS ATO required.\n• COA 2 (Incremental Upgrade - Recommended): Moderate Cost | Low Risk | Leverages inherited RMF controls.\n• COA 3 (Full Replacement): High Cost | 12-Month Schedule | Full eMASS ATO package required.`,
+        ppsm: `UNCLASSIFIED // PUBLIC PROTOTYPE DRAFT\nPPSM FIREWALL EXCEPTION WORKSHEET — ${subject}\nUNIT: ${unit} | DATE: ${dateStr}\n\n1. MISSION JUSTIFICATION:\n   ${context}\n\n2. TRAFFIC PROFILE:\n   • Protocol / Port: TCP 443 (HTTPS)\n   • DISA CAL Alignment: Compliant\n   • ISSM Endorsement: Required prior to boundary implementation.`,
+        satcom: `UNCLASSIFIED // PUBLIC PROTOTYPE DRAFT\nSATCOM SAR / GAR CONCEPT OF OPERATIONS — ${subject}\nUNIT: ${unit} | DATE: ${dateStr}\n\n1. MISSION REQUIREMENT:\n   ${context}\n\n2. COORDINATION CHECKLIST:\n   [ ] SAR submitted via JIST (T-30 Days)\n   [ ] KMI COMSEC keys requested (T-14 Days)\n   [ ] STEP Gateway Access Authorization (GAA) verified.`
+      };
+
+      document.getElementById("doc-output").textContent = templates[type] || templates.exsum;
+    }
+
+    function copyStaffDoc() {
+      const text = document.getElementById("doc-output").textContent;
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById("copy-doc-btn");
+      btn.textContent = "✓ Copied!";
+      setTimeout(() => { btn.textContent = "📋 Copy Draft"; }, 1500);
+    }
+
+    function saveVdiUrl() {
+      const url = document.getElementById("vdi-api-url").value.trim();
+      window.G6_API_URL = url;
+      sessionStorage.setItem("G6_API_URL", url);
+      const status = document.getElementById("vdi-save-status");
+      const pill = document.getElementById("vdi-connection-pill");
+      if (url) {
+        status.textContent = `Connected: Queries will route to ${url} with automatic local fallback.`;
+        pill.textContent = "● AI Engine: VDI Endpoint Active";
+      } else {
+        status.textContent = "Cleared: Running in Local Sentinel-6 Knowledge Engine mode.";
+        pill.textContent = "● AI Engine: Local + VDI Ready";
+      }
+    }
+
+    // Render all 8 Divisions on load
+    document.addEventListener("DOMContentLoaded", () => {
+      const grid = document.getElementById("divisions-grid");
+      if (grid) {
+        grid.innerHTML = g6Divisions.map(d => `
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-blue-500 transition">
+            <div>
+              <span class="text-[11px] font-mono font-bold text-blue-400 bg-blue-950/70 border border-blue-800 px-2 py-0.5 rounded">${d.code}</span>
+              <h4 class="text-sm font-bold text-white mt-2">${d.name}</h4>
+              <p class="text-xs text-slate-400 mt-1 mb-4">${d.desc}</p>
+            </div>
+            <button onclick="fillQuery('${d.query}')" class="w-full text-left bg-slate-900 hover:bg-slate-800 text-blue-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800">
+              <span>Launch Division Workflow</span><span>→</span>
+            </button>
+          </div>
+        `).join("");
+      }
+    });
+  </script>
+</body>
+</html>
