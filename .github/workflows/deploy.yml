@@ -34,11 +34,45 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      # DIAGNOSTIC STEP
+      - name: Check website files
+        run: |
+          echo "================================"
+          echo "G6 AI PORTAL DEPLOYMENT CHECK"
+          echo "================================"
+
+          echo "Current directory:"
+          pwd
+
+          echo ""
+          echo "Repository files:"
+          ls -la
+
+          echo ""
+          echo "G6-AI-ASSISTANT directory:"
+          ls -la G6-AI-ASSISTANT || true
+
+          echo ""
+          echo "Website public directory:"
+          ls -la G6-AI-ASSISTANT/public || true
+
+          echo ""
+          echo "Checking index.html:"
+
+          if [ -f "G6-AI-ASSISTANT/public/index.html" ]; then
+            echo "SUCCESS: index.html exists."
+          else
+            echo "ERROR: index.html is missing."
+            exit 1
+          fi
+
+      # UPLOAD WEBSITE
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
           path: G6-AI-ASSISTANT/public
 
+      # DEPLOY WEBSITE
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4
