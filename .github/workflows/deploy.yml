@@ -1,13 +1,10 @@
-
 name: Deploy G6 AI Portal
 
 on:
   push:
     branches:
       - main
-    paths:
-      - 'G6-AI-ASSISTANT/public/**'
-      - '.github/workflows/deploy.yml'
+    # Removed path restrictions to ensure any file update triggers the deployment run safely
   workflow_dispatch:
 
 permissions:
@@ -24,9 +21,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -34,35 +29,30 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      # DIAGNOSTIC STEP
+      # DIAGNOSTIC STEP & AUTO-STAGE
       - name: Check website files
         run: |
           echo "================================"
           echo "G6 AI PORTAL DEPLOYMENT CHECK"
           echo "================================"
-
-          echo "Current directory:"
-          pwd
-
+          echo "Current directory: $(pwd)"
           echo ""
-          echo "Repository files:"
-          ls -la
-
+          echo "Repository file structure:"
+          find . -maxdepth 3 -not -path '*/.*'
           echo ""
-          echo "G6-AI-ASSISTANT directory:"
-          ls -la G6-AI-ASSISTANT || true
 
-          echo ""
-          echo "Website public directory:"
-          ls -la G6-AI-ASSISTANT/public || true
+          # Search for index.html while avoiding system directories
+          HTML_PATH=$(find . -not -path "*/.*" -not -path "./_site*" -name "index.html" | head -n 1)
 
-          echo ""
-          echo "Checking index.html:"
-
-          if [ -f "G6-AI-ASSISTANT/public/index.html" ]; then
-            echo "SUCCESS: index.html exists."
+          if [ -n "$HTML_PATH" ]; then
+            echo "SUCCESS: index.html found at $HTML_PATH"
+            # Extract folder location of index.html
+            SITE_DIR=$(dirname "$HTML_PATH")
+            echo "Staging files from '$SITE_DIR' into staging directory '_site'..."
+            mkdir -p _site
+            cp -r "$SITE_DIR"/* _site/
           else
-            echo "ERROR: index.html is missing."
+            echo "ERROR: index.html is missing from the repository."
             exit 1
           fi
 
@@ -70,7 +60,8 @@ jobs:
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: G6-AI-ASSISTANT/public
+          # Uploading the dynamically detected and staged folder
+          path: _site
 
       # DEPLOY WEBSITE
       - name: Deploy website
