@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-    # Removed path restrictions to ensure any file update triggers the deployment run safely
   workflow_dispatch:
 
 permissions:
@@ -29,7 +28,7 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      # DIAGNOSTIC STEP & AUTO-STAGE
+      # DIAGNOSTIC STEP & SAFE AUTO-STAGE
       - name: Check website files
         run: |
           echo "================================"
@@ -41,16 +40,32 @@ jobs:
           find . -maxdepth 3 -not -path '*/.*'
           echo ""
 
-          # Search for index.html while avoiding system directories
-          HTML_PATH=$(find . -not -path "*/.*" -not -path "./_site*" -name "index.html" | head -n 1)
+          # Search for index.html while avoiding hidden git files
+          HTML_PATH=$(find . -not -path "*/.*" -name "index.html" | head -n 1)
 
           if [ -n "$HTML_PATH" ]; then
             echo "SUCCESS: index.html found at $HTML_PATH"
             # Extract folder location of index.html
-            SITE_DIR=$(dirname "$HTML_PATH")
-            echo "Staging files from '$SITE_DIR' into staging directory '_site'..."
-            mkdir -p _site
-            cp -r "$SITE_DIR"/* _site/
+            SRC_DIR=$(dirname "$HTML_PATH")
+            echo "Source directory is: $SRC_DIR"
+            
+            # Create staging folder safely in /tmp to prevent "directory copying into itself"
+            rm -rf /tmp/_site
+            mkdir -p /tmp/_site
+            
+            # Copy files to temporary folder
+            cp -r "$SRC_DIR"/* /tmp/_site/
+            
+            # Remove any nested _site folder if it was copied accidentally
+            rm -rf /tmp/_site/_site
+            
+            # Bring staged directory back to workspace
+            rm -rf _site
+            mv /tmp/_site _site
+            
+            echo ""
+            echo "Staged files ready for upload:"
+            ls -la _site
           else
             echo "ERROR: index.html is missing from the repository."
             exit 1
@@ -60,7 +75,6 @@ jobs:
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
-          # Uploading the dynamically detected and staged folder
           path: _site
 
       # DEPLOY WEBSITE
