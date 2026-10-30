@@ -3,391 +3,410 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="USAREUR-AF G6 Enterprise Operational Guidance, Utilities, and AI Directory Portal">
-  <title>USAREUR-AF G6 | Enterprise C4 & Cyber Support Portal</title>
-  <!-- Tailwind CSS CDN for guaranteed crisp rendering on GitHub Pages -->
+  <meta name="description" content="USAREUR-AF CIO/G6 Virtual Staff Advisor — Unclassified Decision-Support Prototype">
+  <title>USAREUR-AF CIO/G6 | Virtual Staff Advisor</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .classification-banner {
-      background-color: #007a3d;
-      color: #ffffff;
-      font-weight: 700;
+    .unclass-banner {
+      background-color: #065f46;
+      color: #ecfdf5;
+      font-weight: 800;
       text-align: center;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      padding: 4px 0;
-    }
-    .chat-bubble-ai {
-      background-color: #1e293b;
-      border-left: 4px solid #3b82f6;
-    }
-    .chat-bubble-user {
-      background-color: #172554;
-      border-right: 4px solid #60a5fa;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      padding: 5px 12px;
+      border-bottom: 1px solid #047857;
     }
     .tab-btn.active {
-      background-color: #1d4ed8;
+      background-color: #1e3a8a;
       color: #ffffff;
       border-color: #60a5fa;
+    }
+    .wf-card.active {
+      border-color: #3b82f6;
+      background-color: #0f172a;
+      box-shadow: 0 0 0 1px #3b82f6;
     }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
 
-  <!-- Top Security Classification Banner -->
-  <div class="classification-banner sticky top-0 z-50 shadow">
-    UNCLASSIFIED // PUBLIC INFORMATION &amp; PROTOTYPE ENVIRONMENT
+  <!-- Top Classification & Authority Guardrail Banner -->
+  <div class="unclass-banner sticky top-0 z-50">
+    UNCLASSIFIED // ADVISORY DECISION-SUPPORT PROTOTYPE — DOES NOT EXERCISE COMMAND OR CIO/G6 APPROVAL AUTHORITY
   </div>
 
-  <!-- USG Warning & VDI Status Bar -->
-  <aside aria-label="System Notice" class="bg-amber-950/90 border-b border-amber-800/80 text-amber-200 px-4 py-1.5 text-xs">
+  <!-- Sub-Header Governance Bar -->
+  <div class="bg-slate-900 border-b border-slate-800 px-4 py-1.5 text-xs text-slate-400">
     <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-      <span><strong>USG NOTICE:</strong> USAREUR-AF G6 Prototype Information System. Advisory Support &amp; Unclassified Workflows Only.</span>
-      <div class="flex items-center space-x-4 font-mono text-amber-300">
-        <span id="vdi-connection-pill" class="inline-flex items-center px-2 py-0.5 rounded bg-slate-900 border border-amber-700 text-[11px]">
-          ● AI Engine: Local + VDI Ready
+      <span><strong>CHARTER:</strong> Apply approved CIO/G6 policies, decision criteria, and staff processes to generate draft staff products for human review.</span>
+      <div class="flex items-center space-x-3 font-mono">
+        <span id="engine-status-pill" class="px-2 py-0.5 rounded bg-slate-950 text-emerald-400 border border-emerald-800/80 text-[11px]">
+          ● Engine: CIO/G6 Rubric + VDI Ready
         </span>
-        <span class="hidden sm:inline">24/7 G6 OPS DESK: DSN 314-537-1110</span>
       </div>
     </div>
-  </aside>
+  </div>
 
-  <!-- Main Header & Navigation Bar -->
-  <header class="bg-slate-900 border-b border-slate-800 shadow-lg">
+  <!-- Primary Command Header -->
+  <header class="bg-slate-900/95 border-b border-slate-800 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-      <!-- Brand Identity -->
       <div class="flex items-center space-x-3.5">
-        <div class="w-11 h-11 bg-gradient-to-br from-blue-700 to-blue-900 border-2 border-blue-400 rounded-xl flex items-center justify-center font-extrabold text-lg text-white shadow-md">
-          G6
+        <div class="w-12 h-12 bg-slate-950 border-2 border-blue-500 rounded-lg flex flex-col items-center justify-center font-black text-white shadow">
+          <span class="text-xs text-blue-400 leading-none">CIO</span>
+          <span class="text-base leading-none mt-0.5">G6</span>
         </div>
         <div>
-          <div class="flex items-center space-x-2">
-            <h1 class="text-lg sm:text-xl font-extrabold tracking-wide uppercase text-white">USAREUR-AF G6 Directorate</h1>
-            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-950 text-emerald-300 border border-emerald-700">
-              ● Theater Systems: GREEN
+          <div class="flex items-center space-x-2.5">
+            <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white">USAREUR-AF CIO/G6 Virtual Staff Advisor</h1>
+            <span class="hidden md:inline-block px-2 py-0.5 text-[10px] font-mono uppercase bg-amber-950/90 text-amber-300 border border-amber-700/80 rounded">
+              Advisory Staff Aid Only
             </span>
           </div>
-          <p class="text-xs text-slate-400">Enterprise C4 Systems • Cyber Defense • Architecture &amp; AI Staff Support</p>
+          <p class="text-xs text-slate-400 mt-0.5">Structured Staff Analysis • 10-Criterion Decision Rubric • COA &amp; Risk Generation • Coordination Routing</p>
         </div>
       </div>
 
-      <!-- Clean Top Navigation Tabs -->
-      <nav class="flex flex-wrap gap-2" aria-label="Portal Workspaces">
-        <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn active text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-800 transition">
-          ⚡ Practical Guidance &amp; AI
+      <!-- Navigation Tabs -->
+      <nav class="flex flex-wrap gap-2" aria-label="Workspace Navigation">
+        <button onclick="switchTab('advisor')" id="tab-advisor" class="tab-btn active text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-900 hover:bg-slate-800 transition">
+          ⚖️ Staff Decision Workbench
         </button>
-        <button onclick="switchTab('divisions')" id="tab-divisions" class="tab-btn text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-800 transition">
-          🏛️ G6 Divisions (8)
+        <button onclick="switchTab('rubric')" id="tab-rubric" class="tab-btn text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-900 hover:bg-slate-800 transition">
+          📊 10-Criterion Rubric
         </button>
-        <button onclick="switchTab('generator')" id="tab-generator" class="tab-btn text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-800 transition">
-          📝 Staff Document Generator
+        <button onclick="switchTab('kb')" id="tab-kb" class="tab-btn text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-900 hover:bg-slate-800 transition">
+          📚 Controlled Knowledge Base
         </button>
-        <button onclick="switchTab('vdi')" id="tab-vdi" class="tab-btn text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-800/80 hover:bg-slate-800 transition">
-          🖥️ VDI Claude AI Config
+        <button onclick="switchTab('conops')" id="tab-conops" class="tab-btn text-xs font-bold px-3.5 py-2 rounded-lg border border-slate-700 bg-slate-900 hover:bg-slate-800 transition">
+          📜 Charter, CONOPS &amp; VDI Config
         </button>
       </nav>
     </div>
   </header>
 
-  <!-- MAIN WORKSPACE CONTAINER -->
-  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow space-y-8">
+  <!-- MAIN CONTENT AREA -->
+  <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow space-y-6">
 
-    <!-- ========================================== -->
-    <!-- TAB 1: PRACTICAL GUIDANCE & AI OVERVIEW    -->
-    <!-- ========================================== -->
-    <div id="panel-overview" class="space-y-8">
+    <!-- ========================================================= -->
+    <!-- TAB 1: STAFF DECISION WORKBENCH                           -->
+    <!-- ========================================================= -->
+    <div id="panel-advisor" class="space-y-6">
 
-      <!-- HERO / PRACTICAL AI GUIDANCE SEARCH -->
-      <section class="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 border border-blue-700/50 rounded-2xl p-6 sm:p-8 shadow-2xl">
-        <div class="max-w-3xl mx-auto text-center space-y-3">
-          <span class="inline-block px-3 py-1 bg-blue-900/80 text-blue-300 border border-blue-500/60 rounded-full text-xs font-bold uppercase tracking-wider">
-            Sentinel-6 &amp; VDI AI Mission Guidance Engine
-          </span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            How Can USAREUR-AF G6 Support Your Unit Today?
-          </h2>
-          <p class="text-sm text-slate-300 leading-relaxed">
-            Get instant step-by-step guidance on SAR/GAR satellite windows, SIPR/NIPR account tokens, classified spillage containment, eMASS RMF packages, or firewall PPSM exemptions.
-          </p>
+      <!-- 5 Initial High-Value Workflows -->
+      <section>
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Step 1 · Select Authorized Staff Workflow</span>
+            <h2 class="text-base font-bold text-white">Initial Release Decision-Support Workflows (Low-Risk / High-Volume)</h2>
+          </div>
+          <span class="text-xs text-slate-400">Select a workflow to load required intake criteria:</span>
+        </div>
 
-          <!-- Search Input Bar -->
-          <div class="relative mt-5">
-            <input
-              type="text"
-              id="ai-query-input"
-              placeholder="Ask any G6 workflow question or request a staff product (e.g., 'Request SATCOM', 'Spillage action plan', 'Draft EXSUM')..."
-              class="w-full bg-slate-950/90 text-white placeholder-slate-400 text-sm rounded-xl pl-4 pr-32 py-4 border border-slate-600 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500 shadow-inner"
-              onkeydown="if(event.key === 'Enter') handleUserQuery()"
-            >
-            <button
-              onclick="handleUserQuery()"
-              id="ask-btn"
-              class="absolute right-2 top-2 bottom-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-5 rounded-lg transition-colors shadow-md">
-              Ask G6 AI →
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          <button onclick="selectWorkflow('triage')" id="wf-triage" class="wf-card active text-left bg-slate-900 border border-slate-800 rounded-xl p-3.5 hover:border-slate-600 transition flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-mono font-bold text-blue-400 bg-blue-950/80 border border-blue-800 px-1.5 py-0.5 rounded">WORKFLOW 01</span>
+              <h3 class="text-sm font-bold text-white mt-2">IT Requirement Intake &amp; Triage</h3>
+              <p class="text-xs text-slate-400 mt-1">Categorize request, flag missing facts, identify owning G6 division, and route coordination.</p>
+            </div>
+            <span class="text-[11px] text-blue-400 font-semibold mt-3 inline-block">Load Intake Template →</span>
+          </button>
+
+          <button onclick="selectWorkflow('decision')" id="wf-decision" class="wf-card text-left bg-slate-900 border border-slate-800 rounded-xl p-3.5 hover:border-slate-600 transition flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-mono font-bold text-purple-400 bg-purple-950/80 border border-purple-800 px-1.5 py-0.5 rounded">WORKFLOW 02</span>
+              <h3 class="text-sm font-bold text-white mt-2">Decision-Paper Drafting</h3>
+              <p class="text-xs text-slate-400 mt-1">Convert staff inputs into a CIO/G6 decision brief with 4 COAs, risk register, and staff coordination.</p>
+            </div>
+            <span class="text-[11px] text-blue-400 font-semibold mt-3 inline-block">Load Decision Format →</span>
+          </button>
+
+          <button onclick="selectWorkflow('architecture')" id="wf-architecture" class="wf-card text-left bg-slate-900 border border-slate-800 rounded-xl p-3.5 hover:border-slate-600 transition flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-1.5 py-0.5 rounded">WORKFLOW 03</span>
+              <h3 class="text-sm font-bold text-white mt-2">Architecture &amp; Modernization</h3>
+              <p class="text-xs text-slate-400 mt-1">Assess enterprise alignment, coalition/NATO interoperability, PPSM, and technical dependencies.</p>
+            </div>
+            <span class="text-[11px] text-blue-400 font-semibold mt-3 inline-block">Load Arch Review →</span>
+          </button>
+
+          <button onclick="selectWorkflow('cyber')" id="wf-cyber" class="wf-card text-left bg-slate-900 border border-slate-800 rounded-xl p-3.5 hover:border-slate-600 transition flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-mono font-bold text-red-400 bg-red-950/80 border border-red-800 px-1.5 py-0.5 rounded">WORKFLOW 04</span>
+              <h3 class="text-sm font-bold text-white mt-2">Cyber Risk Discussion Support</h3>
+              <p class="text-xs text-slate-400 mt-1">Summarize RMF/Zero Trust risk tradeoffs, controls, and ISSM/AO escalation points (non-authorizing).</p>
+            </div>
+            <span class="text-[11px] text-blue-400 font-semibold mt-3 inline-block">Load Cyber Analysis →</span>
+          </button>
+
+          <button onclick="selectWorkflow('governance')" id="wf-governance" class="wf-card text-left bg-slate-900 border border-slate-800 rounded-xl p-3.5 hover:border-slate-600 transition flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-mono font-bold text-amber-400 bg-amber-950/80 border border-amber-800 px-1.5 py-0.5 rounded">WORKFLOW 05</span>
+              <h3 class="text-sm font-bold text-white mt-2">Governance-Board Prep</h3>
+              <p class="text-xs text-slate-400 mt-1">Generate read-aheads, issue summaries, principal questions, decisions required, and task trackers.</p>
+            </div>
+            <span class="text-[11px] text-blue-400 font-semibold mt-3 inline-block">Load Board Prep →</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Main Workbench Grid: Left Input Parameters | Right Structured Output -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Column: Action Officer Input Parameters (5 Cols) -->
+        <div class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-lg">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-blue-400">Step 2 · Supply Action Officer Inputs</span>
+              <h3 id="active-wf-title" class="text-base font-bold text-white">01 · IT Requirement Intake &amp; Triage</h3>
+            </div>
+            <button onclick="loadSampleScenario()" class="text-xs bg-slate-800 hover:bg-slate-700 text-blue-300 border border-slate-700 px-2.5 py-1 rounded">
+              Fill Sample Case
             </button>
           </div>
 
-          <!-- Instant Practical Quick Action Chips -->
-          <div class="flex flex-wrap items-center justify-center gap-2 pt-3 text-xs">
-            <span class="text-slate-400 font-semibold">Quick Workflows:</span>
-            <button onclick="fillQuery('How do I submit an emergency SAR/GAR for satellite bandwidth?')" class="bg-slate-800/90 hover:bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 text-slate-200 transition">🛰️ Request SATCOM</button>
-            <button onclick="fillQuery('Who do I contact for classified spillage or cyber incident?')" class="bg-red-950/60 hover:bg-red-900/70 border border-red-700/70 rounded-lg px-3 py-1.5 text-red-200 transition">🚨 Spillage Action Plan</button>
-            <button onclick="fillQuery('How do I open a firewall port via PPSM?')" class="bg-slate-800/90 hover:bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 text-slate-200 transition">🛡️ Open Firewall Port</button>
-            <button onclick="fillQuery('Where do I request tactical COMSEC crypto keys?')" class="bg-slate-800/90 hover:bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 text-slate-200 transition">🔑 Request Crypto Keys</button>
-            <button onclick="fillQuery('Where do I request SIPRNet or NIPRNet account access?')" class="bg-slate-800/90 hover:bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 text-slate-200 transition">💻 SIPR/NIPR Account</button>
-            <button onclick="fillQuery('What are the steps to register an eMASS package for ATO?')" class="bg-slate-800/90 hover:bg-slate-700 border border-slate-600 rounded-lg px-3 py-1.5 text-slate-200 transition">📋 eMASS RMF ATO</button>
-          </div>
-        </div>
-
-        <!-- Interactive AI Conversation & Answer Display Box -->
-        <div id="ai-response-container" class="mt-6 max-w-4xl mx-auto hidden">
-          <div class="bg-slate-900/95 border border-slate-700 rounded-xl p-5 shadow-xl space-y-4">
-            <div class="flex flex-wrap items-center justify-between border-b border-slate-800 pb-3 gap-2">
-              <div class="flex items-center space-x-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-blue-400 animate-pulse"></span>
-                <span class="font-bold text-xs uppercase tracking-wider text-blue-300">G6 AI Workflow &amp; Staff Advisor</span>
-                <span id="response-badge" class="text-xs bg-blue-950 text-blue-300 border border-blue-800 px-2 py-0.5 rounded font-mono">Ready</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <button onclick="clearConversation()" class="text-xs text-slate-300 hover:text-white bg-slate-800 border border-slate-700 rounded px-2.5 py-1">
-                  Clear Chat
-                </button>
-                <button onclick="document.getElementById('ai-response-container').classList.add('hidden')" class="text-xs text-slate-400 hover:text-white px-2 py-1">
-                  ✕
-                </button>
-              </div>
-            </div>
-
-            <!-- Conversation Log -->
-            <div id="chat-history" class="space-y-3 max-h-96 overflow-y-auto pr-1" role="log" aria-live="polite"></div>
-
-            <!-- Current Action Bar -->
-            <div id="ai-action-buttons" class="pt-2 border-t border-slate-800 flex flex-wrap justify-between items-center gap-2 text-xs"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CORE 8 G6 OPERATIONAL DESKS & SELF-SERVICE TOOLS -->
-      <section>
-        <div class="flex items-center justify-between mb-4">
           <div>
-            <h3 class="text-sm font-extrabold uppercase tracking-wider text-blue-400">G6 Directorate Functional Desks &amp; Unclassified Tools</h3>
-            <p class="text-xs text-slate-400">Select any operational workflow below for immediate checklists, routing, and AI staff support.</p>
+            <label class="block text-xs font-bold text-slate-300 mb-1" for="req-title">Requirement / Proposal Title</label>
+            <input id="req-title" type="text" placeholder="e.g., Coalition Mission Partner Data Exchange Gateway" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-400 focus:outline-none">
           </div>
-          <button onclick="switchTab('divisions')" class="text-xs text-blue-400 hover:text-blue-300 font-semibold">
-            Explore All 8 Divisions →
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1" for="req-originator">Requesting Unit / Staff</label>
+              <input id="req-originator" type="text" placeholder="e.g., G3/5/7 Plans / 2d Theater Signal Bde" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-400 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1" for="req-suspense">Target Decision Suspense</label>
+              <input id="req-suspense" type="text" placeholder="e.g., 15 NOV 2026 (Q1 CCB)" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-400 focus:outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1" for="req-facts">Confirmed Facts, Operational Need &amp; Known Constraints</label>
+            <textarea id="req-facts" rows="4" placeholder="Describe the mission problem, technical scope, known funding/manpower status, or architecture baseline..." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-400 focus:outline-none"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1" for="req-gaps">Known Uncertainties / Open Questions (Optional)</label>
+            <textarea id="req-gaps" rows="2" placeholder="e.g., Unclear if funding is POM'd in FY27; awaiting DISA PPSM CAL validation..." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-400 focus:outline-none"></textarea>
+          </div>
+
+          <!-- Guardrail Reminder -->
+          <div class="bg-slate-950 border border-slate-800 rounded-lg p-3 text-[11px] text-slate-400 space-y-1">
+            <div class="font-bold text-amber-400">🔒 Senior-Staff Guardrails Enforced:</div>
+            <p>• Separates confirmed <strong>Facts</strong> from unvalidated <strong>Assumptions</strong>.</p>
+            <p>• Recommends decision authority (e.g., CIO/G6, AO, CCB, G8) without claiming approval authority.</p>
+            <p>• Cites controlled reference tiers or explicitly labels conclusions as <em>Staff Assessments</em>.</p>
+          </div>
+
+          <button onclick="generateAdvisoryPackage()" id="generate-btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs transition shadow-lg">
+            Generate CIO/G6 Advisory Staff Product →
           </button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- Desk 1: SATCOM & Tactical C4 -->
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-blue-500/80 transition shadow-md">
-            <div>
-              <div class="flex items-center justify-between text-blue-400 mb-2">
-                <span class="font-bold text-xs font-mono bg-blue-950/80 border border-blue-800 px-2 py-0.5 rounded">C4 / TACTICAL</span>
-                <span class="text-lg">📡</span>
-              </div>
-              <h4 class="text-base font-bold text-white mb-1">SATCOM &amp; Tactical Radios</h4>
-              <p class="text-xs text-slate-400 mb-4">Submit SAR/GAR requests, acquire Land Mobile Radio (LMR) talkgroups, and manage KMI COMSEC key allocations.</p>
-            </div>
-            <div class="space-y-2 border-t border-slate-800 pt-3">
-              <button onclick="fillQuery('How do I submit an emergency SAR/GAR for satellite bandwidth?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-blue-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
-                <span>Submit SAR/GAR Request</span><span>→</span>
-              </button>
-              <button onclick="fillQuery('Where do I request tactical COMSEC crypto keys?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-blue-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
-                <span>Crypto / KMI Key Issuance</span><span>→</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Desk 2: Cyber Defense & CSOC -->
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-red-500/80 transition shadow-md">
-            <div>
-              <div class="flex items-center justify-between text-red-400 mb-2">
-                <span class="font-bold text-xs font-mono bg-red-950/80 border border-red-800 px-2 py-0.5 rounded">CYBER / CSOC</span>
-                <span class="text-lg">🚨</span>
-              </div>
-              <h4 class="text-base font-bold text-white mb-1">Cyber Incident &amp; Spillage</h4>
-              <p class="text-xs text-slate-400 mb-4">Mandatory step-by-step procedures to isolate workstations, contain classified spills, and verify IAVM compliance.</p>
-            </div>
-            <div class="space-y-2 border-t border-slate-800 pt-3">
-              <button onclick="fillQuery('Who do I contact for classified spillage or cyber incident?')" class="w-full text-left bg-red-950/40 hover:bg-red-900/60 text-red-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-red-800/60 transition">
-                <span>Spill Containment Checklist</span><span>🚨</span>
-              </button>
-              <button onclick="fillQuery('What is the IAVM vulnerability remediation workflow?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-slate-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
-                <span>IAVM &amp; STIG Compliance</span><span>→</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Desk 3: Network & Boundary -->
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-emerald-500/80 transition shadow-md">
-            <div>
-              <div class="flex items-center justify-between text-emerald-400 mb-2">
-                <span class="font-bold text-xs font-mono bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded">NETOPS / BOUNDARY</span>
-                <span class="text-lg">🌐</span>
-              </div>
-              <h4 class="text-base font-bold text-white mb-1">Accounts &amp; Firewalls</h4>
-              <p class="text-xs text-slate-400 mb-4">Onboard personnel onto SIPR/NIPR enclaves, request theater VPN access, and file PPSM firewall exemptions.</p>
-            </div>
-            <div class="space-y-2 border-t border-slate-800 pt-3">
-              <button onclick="fillQuery('Where do I request SIPRNet or NIPRNet account access?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-emerald-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
-                <span>SIPR/NIPR Account Onboarding</span><span>→</span>
-              </button>
-              <button onclick="fillQuery('How do I open a firewall port via PPSM?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-emerald-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
-                <span>PPSM Firewall Exemption</span><span>→</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Desk 4: Governance, RMF & CUI -->
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-amber-500/80 transition shadow-md">
-            <div>
-              <div class="flex items-center justify-between text-amber-400 mb-2">
-                <span class="font-bold text-xs font-mono bg-amber-950/80 border border-amber-800 px-2 py-0.5 rounded">RMF &amp; GOVERNANCE</span>
-                <span class="text-lg">📋</span>
-              </div>
-              <h4 class="text-base font-bold text-white mb-1">RMF, ATO &amp; Staff Products</h4>
-              <p class="text-xs text-slate-400 mb-4">Register eMASS packages for ATO, verify CUI marking rules, and generate EXSUMs or Decision Papers.</p>
-            </div>
-            <div class="space-y-2 border-t border-slate-800 pt-3">
-              <button onclick="fillQuery('What are the steps to register an eMASS package for ATO?')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-amber-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
-                <span>eMASS ATO Checklist</span><span>→</span>
-              </button>
-              <button onclick="switchTab('generator')" class="w-full text-left bg-slate-950 hover:bg-slate-800 text-amber-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800 transition">
-                <span>Open Staff Product Generator</span><span>→</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- IMMEDIATE OPERATIONAL CONTACTS & DESKS -->
-      <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-lg">
-        <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-300 mb-3 flex items-center space-x-2">
-          <span>📞</span>
-          <span>Immediate Theater Operational Desks (Unclassified Directory Reference)</span>
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-            <p class="text-blue-400 font-bold uppercase">24/7 G6 Operations Desk (DOC)</p>
-            <p class="text-white font-mono text-sm mt-1">DSN 314-537-1110</p>
-            <p class="text-slate-400 mt-1">Commercial: +49 (0)611-143-537-1110</p>
-            <p class="text-slate-500 mt-1">Use for: Tactical outage escalation, emergency SAR/GAR PINs, and frequency deconfliction.</p>
-          </div>
-          <div class="bg-slate-950 p-4 rounded-xl border border-red-900/50">
-            <p class="text-red-400 font-bold uppercase">Theater CSOC Emergency Line</p>
-            <p class="text-red-300 font-mono text-sm mt-1">DSN 314-537-9911</p>
-            <p class="text-slate-400 mt-1">Direct: +49 (0)611-143-537-9911</p>
-            <p class="text-slate-500 mt-1">Use for: Active network intrusions, unauthorized software, or classified spillages (30-min reporting window).</p>
-          </div>
-          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-            <p class="text-emerald-400 font-bold uppercase">AESD-Europe User Help Desk</p>
-            <p class="text-white font-mono text-sm mt-1">DSN 314-542-4357 (HELP)</p>
-            <p class="text-slate-400 mt-1">Toll-Free Europe: 00800-0000-4357</p>
-            <p class="text-slate-500 mt-1">Use for: SIPRNet/NIPRNet smartcard lockouts, Outlook access, DD 2875 onboarding, and ticketing.</p>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- TAB 2: ALL 8 G6 DIVISIONS & SYSTEMS        -->
-    <!-- ========================================== -->
-    <div id="panel-divisions" class="hidden space-y-6">
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-        <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Directorate Organization</span>
-        <h2 class="text-2xl font-extrabold text-white mt-1">USAREUR-AF G6 Functional Divisions &amp; Unclassified Enclaves</h2>
-        <p class="text-sm text-slate-400 mt-1">Click any division action below to launch a tailored AI workflow assessment in the main guidance engine.</p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6" id="divisions-grid"></div>
-      </div>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- TAB 3: STAFF PRODUCT & DOCUMENT GENERATOR  -->
-    <!-- ========================================== -->
-    <div id="panel-generator" class="hidden space-y-6">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-          <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Standardized Staff Formats</span>
-          <h3 class="text-xl font-bold text-white">Generate G6 Staff Product</h3>
-
+        <!-- Right Column: Standard CIO/G6 Advisory Output (7 Cols) -->
+        <div class="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-lg">
           <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1" for="doc-type">Document Template</label>
-            <select id="doc-type" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
-              <option value="exsum">Executive Summary (EXSUM)</option>
-              <option value="decision">Staff Decision Paper (AR 25-50)</option>
-              <option value="coa">COA Comparison Matrix</option>
-              <option value="ppsm">PPSM Firewall Exception Justification</option>
-              <option value="satcom">SATCOM SAR/GAR Concept of Operations</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1" for="doc-subject">Subject / Requirement Title</label>
-            <input id="doc-subject" type="text" placeholder="e.g., Theater Tactical Radio Modernization" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1" for="doc-unit">Originating Division / Unit</label>
-            <input id="doc-unit" type="text" placeholder="e.g., USAREUR-AF G6 Plans & Architecture" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-slate-300 mb-1" for="doc-context">Key Facts &amp; Operational Impact</label>
-            <textarea id="doc-context" rows="4" placeholder="Enter suspense dates, technical dependencies, or resource constraints..." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white"></textarea>
-          </div>
-
-          <button onclick="generateStaffDoc()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg text-xs transition shadow">
-            Generate Formatted Draft →
-          </button>
-        </div>
-
-        <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+            <div class="flex flex-wrap items-center justify-between border-b border-slate-800 pb-3 mb-4 gap-2">
               <div>
-                <h3 class="text-base font-bold text-white">Formatted Staff Output (Unclassified)</h3>
-                <p class="text-xs text-slate-400">Ready to copy into NIPR email, Word, or eMASS package notes.</p>
+                <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Step 3 · Human Review &amp; Disposition</span>
+                <h3 class="text-base font-bold text-white">Standardized CIO/G6 Decision-Support Output</h3>
               </div>
-              <button onclick="copyStaffDoc()" id="copy-doc-btn" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 text-xs font-bold px-3 py-1.5 rounded-lg">
-                📋 Copy Draft
-              </button>
+              <div class="flex items-center space-x-2">
+                <button onclick="copyAdvisoryOutput()" id="copy-btn" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200 text-xs font-bold px-3 py-1.5 rounded-lg">
+                  📋 Copy Staff Package
+                </button>
+              </div>
             </div>
-            <pre id="doc-output" class="bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs text-slate-200 font-mono whitespace-pre-wrap min-h-[340px]">Select a template on the left and click "Generate Formatted Draft" to build a compliant G6 staff product.</pre>
+
+            <!-- Output Container -->
+            <div id="advisory-output" class="bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs text-slate-200 font-mono whitespace-pre-wrap leading-relaxed max-h-[620px] overflow-y-auto">UNCLASSIFIED // ADVISORY STAFF DRAFT — REQUIRES HUMAN VALIDATION
+
+Select a workflow above, enter your requirement details on the left (or click "Fill Sample Case"), and click "Generate CIO/G6 Advisory Staff Product" to produce a complete staff package containing:
+
+  1. BLUF (Recommended action & key condition)
+  2. DECISION REQUESTED (Decision required, Recommended Decision Authority, Deadline)
+  3. CONFIRMED FACTS vs. ASSUMPTIONS REQUIRING VALIDATION
+  4. 10-CRITERION CIO/G6 RUBRIC EVALUATION & SCORING AID
+  5. COURSES OF ACTION (COA 1: Proceed, COA 2: Pilot/Conditions, COA 3: Defer, COA 4: Decline)
+  6. STAFF RECOMMENDATION & CONDITIONS PRECEDENT
+  7. RISK REGISTER & MITIGATIONS
+  8. MANDATORY STAFF COORDINATION (G3/5/7, G8, SJA, Contracting, Cyber/ISSM, Data Owners)
+  9. NEXT ACTIONS & SUSPENSE TRACKER</div>
+          </div>
+
+          <!-- Auditability & Human Disposition Bar -->
+          <div class="mt-4 pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400">
+            <span id="audit-log-status">Audit Trail: Ready · Session inputs remain local unless VDI endpoint is enabled.</span>
+            <span>Disposition: [ ] Accepted w/ Minor Edits  [ ] Escalated  [ ] Returned for Info</span>
           </div>
         </div>
-      </div>
+
+      </section>
     </div>
 
-    <!-- ========================================== -->
-    <!-- TAB 4: VDI CLAUDE AI CONNECTION CONFIG     -->
-    <!-- ========================================== -->
-    <div id="panel-vdi" class="hidden space-y-6">
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-3xl mx-auto space-y-4">
-        <div class="flex items-center justify-between">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Hybrid Backend Integration</span>
-            <h2 class="text-xl font-extrabold text-white mt-1">VDI Python / Claude AI Endpoint Configuration</h2>
-          </div>
-          <span class="px-2.5 py-1 rounded text-xs font-mono bg-emerald-950 text-emerald-300 border border-emerald-800">Non-Disruptive Bridge</span>
-        </div>
-
-        <p class="text-xs text-slate-300 leading-relaxed">
-          Your Python VDI Claude AI backend is completely separate from this static GitHub Pages frontend. By default, this portal uses the instant built-in G6 Knowledge Engine, and if you enter your Python FastAPI/Flask URL below, all search queries will route directly to your VDI AI backend first (with automatic fallback if your VDI session is offline).
+    <!-- ========================================================= -->
+    <!-- TAB 2: 10-CRITERION CIO/G6 DECISION RUBRIC                -->
+    <!-- ========================================================= -->
+    <div id="panel-rubric" class="hidden space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Repeatable Office Decision Logic</span>
+        <h2 class="text-xl font-extrabold text-white mt-1">USAREUR-AF CIO/G6 10-Point Evaluation Framework</h2>
+        <p class="text-xs text-slate-400 mt-1">
+          Rather than mimicking an individual personality, the Virtual Staff Advisor evaluates every proposal against these ten repeatable institutional criteria. Scores serve strictly as a staff aid alongside explicit uncertainty notes.
         </p>
 
-        <div class="space-y-2 pt-2">
-          <label class="block text-xs font-bold text-slate-300" for="vdi-api-url">Python Backend API Endpoint URL (Optional)</label>
-          <div class="flex gap-2">
-            <input id="vdi-api-url" type="url" placeholder="e.g., http://localhost:8000/api/chat or https://your-vdi-service.example.com/api/chat" class="flex-grow bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono">
-            <button onclick="saveVdiUrl()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-lg">
-              Save Endpoint
+        <div class="overflow-x-auto mt-5">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-slate-700 text-slate-300 uppercase bg-slate-950">
+                <th class="py-3 px-4">Criterion</th>
+                <th class="py-3 px-4">Core Staff Evaluation Question</th>
+                <th class="py-3 px-4">Primary Coordinating Staff / Authority</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800 text-slate-300">
+              <tr>
+                <td class="py-3 px-4 font-bold text-blue-300">1. Mission Impact</td>
+                <td class="py-3 px-4">Does this improve operational readiness, resilience, command-and-control (C2), or mission delivery?</td>
+                <td class="py-3 px-4 font-mono text-[11px]">G3/5/7 · Owning Operational Command</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-blue-300">2. Strategic Alignment</td>
+                <td class="py-3 px-4">Does it support approved Command, Army, Joint, and DoW digital modernization priorities?</td>
+                <td class="py-3 px-4 font-mono text-[11px]">CIO/G6 Plans &amp; Strategy</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-blue-300">3. Cybersecurity</td>
+                <td class="py-3 px-4">Does it create or reduce cyber, supply-chain, Zero Trust identity, data, or operational risk?</td>
+                <td class="py-3 px-4 font-mono text-[11px]">G6 Cyber / ISSM / SCA / AO</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-blue-300">4. Architecture &amp; Interoperability</td>
+                <td class="py-3 px-4">Does it fit the approved enterprise architecture and integrate with NATO allies, mission partners, and HHQ?</td>
+                <td class="py-3 px-4 font-mono text-[11px]">G6 Enterprise Architecture · Coalition C4</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-blue-300">5. Data Governance</td>
+                <td class="py-3 px-4">Who owns the data, what are the access controls, and how are quality, retention, and sharing governed?</td>
+                <td class="py-3 px-4 font-mono text-[11px]">Chief Data Officer (CDO) · Data Stewards</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-blue-300">6. Resourcing &amp; Sustainment</td>
+                <td class="py-3 px-4">Are funding, manpower, contracts, licenses, hosting, training, and lifecycle sustainment identified?</td>
+                <td class="py-3 px-4 font-mono text-[11px]">G8 / Resource Management · Contracting</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-blue-300">7. Implementation Feasibility</td>
+                <td class="py-3 px-4">Can it be fielded on the needed timeline with available authorities, transport, and dependencies?</td>
+                <td class="py-3 px-4 font-mono text-[11px]">G6 NETOPS · 2d Theater Signal Bde</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-blue-300">8. Policy &amp; Compliance</td>
+                <td class="py-3 px-4">Are DoW/Army policy, privacy, records management, acquisition, and security requirements addressed?</td>
+                <td class="py-3 px-4 font-mono text-[11px]">SJA · Privacy/Records · G6 Governance</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-blue-300">9. Risk Tradeoffs</td>
+                <td class="py-3 px-4">What is the comparative operational, technical, and schedule risk of acting, delaying, or declining?</td>
+                <td class="py-3 px-4 font-mono text-[11px]">Originating AO · G6 Risk Board</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-blue-300">10. Decision Authority</td>
+                <td class="py-3 px-4">Who is formally authorized to decide, approve exceptions, accept risk, or allocate resources?</td>
+                <td class="py-3 px-4 font-mono text-[11px]">Designated AO / CIO / CCB Chair / CoS</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- TAB 3: CONTROLLED KNOWLEDGE BASE                          -->
+    <!-- ========================================================= -->
+    <div id="panel-kb" class="hidden space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-400">Source Grounding &amp; Currency Metadata</span>
+        <h2 class="text-xl font-extrabold text-white mt-1">Controlled Unclassified Reference Library</h2>
+        <p class="text-xs text-slate-400 mt-1">
+          Every source group carries an explicit Owner, Version/Date, Applicability, and Review Cycle. When a required source is absent or superseded, the advisor flags an information gap rather than inventing policy.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5" id="kb-cards-container"></div>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- TAB 4: CHARTER, CONOPS, SYSTEM PROMPT & VDI BRIDGE        -->
+    <!-- ========================================================= -->
+    <div id="panel-conops" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- Starter Instruction Set (System Prompt for VDI Claude AI) -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-400">VDI Backend System Prompt</span>
+              <h3 class="text-base font-bold text-white">Approved Virtual Staff Advisor Instruction Set</h3>
+            </div>
+            <button onclick="copySystemPrompt()" id="copy-prompt-btn" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs font-bold px-3 py-1.5 rounded-lg">
+              Copy Prompt for VDI Python
             </button>
           </div>
-          <p id="vdi-save-status" class="text-xs text-slate-400">Currently running in Local Sentinel-6 Knowledge Engine mode (No backend required).</p>
+          <pre id="system-prompt-text" class="bg-slate-950 border border-slate-800 rounded-xl p-4 text-[11px] text-slate-300 font-mono whitespace-pre-wrap leading-relaxed max-h-96 overflow-y-auto">You are the USAREUR-AF CIO/G6 Virtual Staff Advisor. You provide unclassified, CIO/G6-aligned decision support to authorized personnel. You do not represent, speak for, or exercise the authority of the USAREUR-AF CIO/G6 or any commander.
+
+Your purpose is to analyze proposals, issues, requirements, risks, and courses of action involving information technology, communications, cybersecurity, data, digital modernization, enterprise architecture, governance, resourcing, and service delivery.
+
+For each substantive request:
+1. State a concise BLUF (one or two sentences stating the recommended action and key condition).
+2. Identify the decision requested, recommended decision authority, and deadline if known.
+3. Distinguish confirmed facts, clearly labeled assumptions requiring validation, analysis, and open questions.
+4. Assess mission impact, strategic alignment, cyber risk, architecture/interoperability, data governance, resourcing, sustainment, compliance, risk tradeoffs, and implementation feasibility.
+5. Present practical COAs (COA 1: Approve/Proceed, COA 2: Proceed with Conditions/Pilot, COA 3: Defer/Gather Info, COA 4: Decline/Alternative) with benefits, risks, resource implications, timeline, and required approvals.
+6. Recommend a COA only when available information supports one; otherwise recommend information collection, a pilot, or escalation.
+7. Identify required coordination and review by G3/5/7, G8, SJA, contracting, resource management, cyber/ISSM, records/privacy, data owners, or subordinate commands.
+
+GUARDRAILS:
+- Do not approve funding, contracts, technical architectures, waivers, risk acceptance, access, releases, operational actions, or exceptions.
+- Do not make classification or CUI-marking determinations.
+- Do not invent policy, directives, funding lines, or approval thresholds. Cite supplied references or state that the conclusion is a staff assessment.</pre>
         </div>
+
+        <!-- VDI Python / Claude AI Endpoint Bridge -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">VDI AI Integration</span>
+            <h3 class="text-base font-bold text-white">Connect Your Python / Claude VDI Backend</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              This portal runs standalone on GitHub Pages using the built-in CIO/G6 Rubric Engine, and connects non-disruptively to your Python VDI Claude service when you configure your endpoint URL below.
+            </p>
+
+            <div class="pt-2">
+              <label class="block text-xs font-bold text-slate-300 mb-1" for="vdi-url-input">Python FastAPI / VDI Endpoint URL</label>
+              <div class="flex gap-2">
+                <input id="vdi-url-input" type="url" placeholder="http://localhost:8000/api/chat" class="flex-grow bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white font-mono">
+                <button onclick="saveVdiEndpoint()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2 rounded-lg">
+                  Save Endpoint
+                </button>
+              </div>
+              <p id="vdi-status-msg" class="text-[11px] text-slate-400 mt-1.5">Current Mode: Local CIO/G6 Decision-Support Engine (Offline-Safe).</p>
+            </div>
+          </div>
+
+          <!-- Measures of Effectiveness Summary -->
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-2 text-xs">
+            <div class="font-bold text-blue-400 uppercase">8. Program Measures of Effectiveness (MOEs)</div>
+            <ul class="list-disc ml-4 text-slate-300 space-y-1 text-[11px]">
+              <li><strong>Draft Acceptance Rate:</strong> % of staff outputs accepted by Action Officers with minor edits.</li>
+              <li><strong>Staff Cycle Time:</strong> Reduction in hours to produce decision-ready papers and CCB read-aheads.</li>
+              <li><strong>Coordination &amp; Routing Accuracy:</strong> Precision in flagging G3/5/7, G8, SJA, KO, and ISSM reviews.</li>
+              <li><strong>Grounding &amp; Safety Rate:</strong> 100% citation grounding with zero fabricated authorities or unauthorized approvals.</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -395,248 +414,342 @@
 
   <!-- Footer -->
   <footer class="bg-slate-950 border-t border-slate-800 text-slate-400 text-xs py-4 mt-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-2">
-      <div>
-        <span>USAREUR-AF G6 Enterprise Portal &amp; AI Staff Assistant</span>
-        <span class="mx-2">•</span>
-        <span>DoDI 8500.01 &amp; AR 25-2 Aligned Prototype</span>
-      </div>
-      <div class="text-slate-500">
-        Advisory Use Only • Verify Claims Against Official Command SOPs
-      </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <span>USAREUR-AF CIO/G6 Virtual Staff Advisor · Decision-Support Prototype</span>
+      <span>Content Currency Office: CIO/G6 Plans, Architecture &amp; Governance Division</span>
     </div>
   </footer>
 
-  <!-- Bottom Security Classification Banner -->
-  <div class="classification-banner">
-    UNCLASSIFIED // PUBLIC INFORMATION &amp; PROTOTYPE ENVIRONMENT
+  <!-- Bottom Banner -->
+  <div class="unclass-banner">
+    UNCLASSIFIED // ADVISORY DECISION-SUPPORT PROTOTYPE — HUMAN REVIEW AND DESIGNATED OFFICIAL APPROVAL REQUIRED
   </div>
 
-  <!-- SELF-CONTAINED G6 SENTINEL + VDI AI BRIDGE ENGINE -->
+  <!-- ========================================================= -->
+  <!-- CIO/G6 VIRTUAL STAFF ADVISOR DECISION ENGINE              -->
+  <!-- ========================================================= -->
   <script>
-    // Optional VDI Python Backend URL (stored in session if configured)
     window.G6_API_URL = sessionStorage.getItem("G6_API_URL") || "";
+    let currentWorkflow = "triage";
 
-    const g6KnowledgeBase = [
+    const workflowMeta = {
+      triage: {
+        title: "01 · IT Requirement Intake & Triage",
+        division: "G6 Plans, Architecture & Requirements Intake",
+        authority: "CIO/G6 Architecture & Requirements Board (ARB) Chair (or Division Chief for routine intake)",
+        sampleTitle: "Theater Logistics Coalition Data Exchange Enclave",
+        sampleOriginator: "G4 Mobility / 21st Theater Sustainment Command",
+        sampleSuspense: "20 NOV 2026 (Q1 ARB)",
+        sampleFacts: "Requesting deployment of a cloud-hosted logistics data-sharing portal for NATO mission partners. Requires cross-boundary HTTPS traffic and identity federation. Unit has initial procurement funds but no sustainment tail identified.",
+        sampleGaps: "Unclear if an approved DISA PPSM CAL exception exists for the partner interface; FY27 sustainment funding and Data Steward designation are unconfirmed."
+      },
+      decision: {
+        title: "02 · Decision-Paper Drafting (AR 25-50 Aligned)",
+        division: "CIO/G6 Front Office / Directorate Staff Action",
+        authority: "USAREUR-AF Chief of Staff / CIO/G6 (as delegated by command threshold)",
+        sampleTitle: "Standardization of Theater Tactical SATCOM & Commercial LEO Terminals",
+        sampleOriginator: "G6 C4 Operations & 2d Theater Signal Brigade",
+        sampleSuspense: "01 DEC 2026",
+        sampleFacts: "Subordinate units are submitting ad-hoc commercial satellite terminal requests across three separate contracting vehicles. Consolidation under a single theater enterprise blanket agreement reduces per-terminal sustainment costs by 22%.",
+        sampleGaps: "Requires G8 validation of OMA funding realignment and SJA/Contracting review of existing vendor period-of-performance cutovers."
+      },
+      architecture: {
+        title: "03 · Architecture & Modernization Alignment Review",
+        division: "G6 Enterprise Architecture & Modernization Division",
+        authority: "CIO/G6 Chief Architect / Enterprise Architecture Review Board",
+        sampleTitle: "Zero Trust Identity Broker Integration for Mission Partner Enclave",
+        sampleOriginator: "G6 Enterprise Services / Coalition C4",
+        sampleSuspense: "10 DEC 2026",
+        sampleFacts: "Proposal introduces an ICAM attribute-based access control broker aligning with DoW Zero Trust Target Level objectives and NATO Federated Mission Networking (FMN) Spiral specifications.",
+        sampleGaps: "Pending verification of latency impact over tactical transport links and confirmation of inherited controls in eMASS."
+      },
+      cyber: {
+        title: "04 · Cybersecurity Risk Discussion Support",
+        division: "G6 Cybersecurity / Information Assurance (ISSM)",
+        authority: "Designated Authorizing Official (AO) — Advisory analysis only; agent cannot authorize risk",
+        sampleTitle: "Interim Operation of Legacy Range Telemetry Server Pending OS Migration",
+        sampleOriginator: "7th Army Training Command (7ATC) S6",
+        sampleSuspense: "05 NOV 2026",
+        sampleFacts: "Legacy telemetry server requires 60-day interim operation inside an isolated VLAN while vendor completes Windows Server STIG-compliant upgrade. Physical access is restricted and external routing is blocked.",
+        sampleGaps: "Formal POA&M milestones and compensating network ACL monitoring logs must be validated by the unit ISSM and SCA prior to AO review."
+      },
+      governance: {
+        title: "05 · Governance-Board Preparation (CCB / ARB Read-Ahead)",
+        division: "G6 IT Governance & Resource Management",
+        authority: "Configuration Control Board (CCB) Chair",
+        sampleTitle: "Q1 Enterprise Configuration Control Board (CCB)Read-Ahead Package",
+        sampleOriginator: "G6 Governance Secretariat",
+        sampleSuspense: "12 NOV 2026",
+        sampleFacts: "Three enterprise boundary changes and two software baseline additions are queued for Q1 CCB voting. All packages have completed initial technical completeness checks.",
+        sampleGaps: "One package lacks confirmed G8 out-year license sustainment verification; requires principal discussion."
+      }
+    };
+
+    const controlledSources = [
       {
-        keywords: ["satcom", "sar", "gar", "satellite", "bandwidth", "wgs", "muos", "step", "radio"],
-        branch: "G6 C4 Operations (Tactical SATCOM)",
-        answer: "<strong>Practical Steps to Request SATCOM:</strong><br>1. Submit a Satellite Access Request (SAR) via the Joint Integrated SATCOM Tool (JIST) at least 30 days prior to mission start.<br>2. For short-notice missions (&lt;72 hours), call the 24/7 G6 Operations Desk to obtain a verbal operational PIN, followed by an immediate emergency SAR upload.<br>3. Obtain your Gateway Access Authorization (GAA) from the Landstuhl or Patch Barracks STEP site prior to terminal bring-up.",
-        poc: "DSN: 314-537-1110 | satcom.usareur@army.mil"
+        group: "1. Command Guidance",
+        title: "USAREUR-AF Command & CIO/G6 Digital Modernization Priorities",
+        owner: "CIO/G6 Strategy & Plans",
+        version: "FY26-27 v2.1",
+        applicability: "Theater Enterprise & Subordinate Commands",
+        cycle: "Annual Review"
       },
       {
-        keywords: ["spill", "spillage", "classified", "incident", "breach", "compromise", "hack", "virus", "malware", "csoc"],
-        branch: "Theater CSOC / Cyber Incident Desk",
-        answer: "<strong>IMMEDIATE ACTION PLAN (Classified Spillage / Cyber Incident):</strong><br>1. <strong>Do NOT power down or reboot</strong> the computer (preserves volatile memory forensics).<br>2. <strong>Physically disconnect</strong> the ethernet cable and disable Wi-Fi/Bluetooth toggles.<br>3. Quarantine the room or machine to prevent unauthorized viewing.<br>4. Call the CSOC Emergency Line at <strong>DSN 314-537-9911</strong> within 30 minutes per CJCSI 6510.01.<br>5. Complete DA Form 5248-R / Incident Worksheet provided by your ISSM and CSOC responder.",
-        poc: "EMERGENCY LINE: DSN 314-537-9911"
+        group: "2. Policies & Standards",
+        title: "DoDI 8500.01 (Cybersecurity) & DoDI 8510.01 (RMF for DoW Systems)",
+        owner: "DoW CIO / G6 Cybersecurity",
+        version: "Current Incorporating Change 1",
+        applicability: "All Unclassified & CUI Enclaves",
+        cycle: "Continuous / Directive-Driven"
       },
       {
-        keywords: ["firewall", "port", "ppsm", "protocol", "exemption", "block", "acl", "traffic", "boundary"],
-        branch: "G6 Networks & Boundary Management",
-        answer: "<strong>How to Request a Firewall Exemption (PPSM):</strong><br>1. Verify whether the port and protocol are listed in the DISA PPSM Category Assurance List (CAL).<br>2. Complete the USAREUR-AF PPSM Exemption Worksheet specifying source/destination IP, subnet, port, and operational justification.<br>3. Obtain cybersecurity endorsement from your unit ISSM and S6/G6 (O-5 or above).<br>4. Submit the package to G6 Networks Boundary Management (standard turnaround: 5–7 business days).",
-        poc: "DSN: 314-537-2240 | ppsm.usareur@army.mil"
+        group: "2. Policies & Standards",
+        title: "DoDI 8551.01 (Ports, Protocols, and Services Management - PPSM) & AR 25-2",
+        owner: "DISA / Army CIO / G6 Boundary",
+        version: "Baseline v4.0",
+        applicability: "All Boundary & Enclave Crossings",
+        cycle: "Semi-Annual CAL Alignment"
       },
       {
-        keywords: ["account", "password", "token", "nipr", "sipr", "cac", "pki", "reset", "aesd", "2875"],
-        branch: "Enterprise Service Desk (AESD-Europe)",
-        answer: "<strong>Practical Account Setup &amp; Resets:</strong><br>1. <strong>Password / PIN Lockout:</strong> Contact AESD-Europe at DSN 314-542-4357.<br>2. <strong>New SIPRNet Token:</strong> Submit a DD Form 2875 (SAAR) signed by your supervisor and security manager (confirming Secret clearance verification in DISS).<br>3. <strong>Cyber Awareness Requirement:</strong> Attach a current DoD Cyber Awareness Challenge certificate dated within the last 365 days.",
-        poc: "DSN: 314-542-4357 (HELP) | AESD-Europe"
+        group: "3. Governance Processes",
+        title: "USAREUR-AF CIO/G6 Requirements Intake, ARB & CCB Charter SOP",
+        owner: "G6 Governance & Resources Division",
+        version: "2026 Charter Rev B",
+        applicability: "All IT Investments & Baseline Changes",
+        cycle: "Annual"
       },
       {
-        keywords: ["comsec", "kmi", "crypto", "key", "skl", "pyq-10", "cipher", "vault", "1687"],
-        branch: "Theater COMSEC Management Office (TCMO)",
-        answer: "<strong>Requesting Cryptographic Material:</strong><br>1. Ensure your unit COMSEC account custodian is formally appointed on DA Form 1687.<br>2. Submit key transfer orders via the Key Management Infrastructure (KMI) Client at least 14 days prior to exercise lock.<br>3. Emergency fills for SKL (AN/PYQ-10) devices must be conducted in person at the COMSEC vault enforcing Two-Person Integrity (TPI).",
-        poc: "DSN: 314-537-1115 | comsec.usareur@army.mil"
+        group: "4. Operational Context",
+        title: "Theater Enterprise Architecture & NATO FMN Interoperability Baseline",
+        owner: "G6 Chief Architect",
+        version: "Spiral 4/5 Reference",
+        applicability: "Coalition & Mission Partner Systems",
+        cycle: "Bi-Annual Exercise Validation"
       },
       {
-        keywords: ["rmf", "ato", "emass", "authorization", "package", "security control", "stig", "iavm"],
-        branch: "G6 Information Assurance / RMF Compliance",
-        answer: "<strong>Practical Path to System ATO (Authority to Operate):</strong><br>1. Register system package in Army eMASS under the USAREUR-AF hierarchy.<br>2. Implement and validate applicable DISA STIGs and IAVMs; upload SCAP and Nessus scan results.<br>3. Coordinate with your Information System Security Manager (ISSM) for control inheritance and POA&amp;M review.<br>4. Submit package through the Security Control Assessor (SCA) for Authorizing Official (AO) decision.",
-        poc: "DSN: 314-537-3315 | rmf.usareur@army.mil"
-      },
-      {
-        keywords: ["cui", "marking", "unclassified", "controlled", "distribution", "exsum", "decision"],
-        branch: "G6 Governance, OPSEC & Staff Support",
-        answer: "<strong>CUI Marking &amp; Staff Product Standards:</strong><br>• <strong>Header &amp; Footer:</strong> Bold, centered: <code>CUI</code> or <code>CONTROLLED UNCLASSIFIED INFORMATION</code> on authorized networks.<br>• <strong>Staff Products:</strong> Use the <em>Staff Document Generator</em> tab above to build formatted EXSUMs, Decision Papers, and COA matrices.<br>• <strong>Public Prototypes:</strong> Keep all public GitHub Pages portals strictly <code>UNCLASSIFIED</code> with no real CUI or PII.",
-        poc: "DSN: 314-537-4400 | governance.usareur@army.mil"
+        group: "5. Staff-Product Standards",
+        title: "AR 25-50 (Preparing and Managing Correspondence) & G6 Action Officer Guide",
+        owner: "USAREUR-AF SGS / G6 Executive Office",
+        version: "Standard Staff Baseline",
+        applicability: "Decision Papers, EXSUMs, Issue Sheets, COAs",
+        cycle: " Biennial"
       }
     ];
 
-    const g6Divisions = [
-      { code: "NETOPS", name: "Network Operations (DODIN-A)", desc: "Theater transport monitoring, ASI maintenance windows, and outage escalation.", query: "How do I escalate a tactical network outage or check maintenance windows?" },
-      { code: "CYBER / CSOC", name: "Cybersecurity & RMF Division", desc: "24/7 cyber defense, spillage containment, eMASS ATO packages, and IAVM compliance.", query: "What are the steps to register an eMASS package for ATO?" },
-      { code: "C4 / TACTICAL", name: "Tactical Comms & SATCOM", desc: "SAR/GAR satellite bandwidth, LMR talkgroups, and tactical radio frequency deconfliction.", query: "How do I submit an emergency SAR/GAR for satellite bandwidth?" },
-      { code: "COMSEC / KMI", name: "Theater COMSEC (TCMO)", desc: "Cryptographic key issuance, KMI account management, and SKL fill scheduling.", query: "Where do I request tactical COMSEC crypto keys?" },
-      { code: "BOUNDARY", name: "Enterprise & Firewall (PPSM)", desc: "DISA CAL verification, firewall port exemptions, and enclave boundary defense.", query: "How do I open a firewall port via PPSM?" },
-      { code: "PLANS & ARCH", name: "Plans, Architecture & Coalition", desc: "C4ISR modernization alignment, NATO/Mission Partner interoperability, and technical reviews.", query: "How do I request a G6 architecture and modernization alignment review?" },
-      { code: "GOVERNANCE", name: "IT Governance & Resources", desc: "Configuration Control Boards (CCB), IT investments, Decision Papers, and EXSUMs.", query: "How do I prepare a G6 Governance Board or CCB decision package?" },
-      { code: "SERVICE DESK", name: "AESD & User Onboarding", desc: "NIPR/SIPR DD Form 2875 accounts, smartcard unlocks, and VIP communications support.", query: "Where do I request SIPRNet or NIPRNet account access?" }
-    ];
-
-    function switchTab(tabName) {
-      ["overview", "divisions", "generator", "vdi"].forEach(id => {
-        document.getElementById(`panel-${id}`).classList.toggle("hidden", id !== tabName);
-        document.getElementById(`tab-${id}`).classList.toggle("active", id === tabName);
+    function switchTab(tab) {
+      ["advisor", "rubric", "kb", "conops"].forEach(id => {
+        document.getElementById(`panel-${id}`).classList.toggle("hidden", id !== tab);
+        document.getElementById(`tab-${id}`).classList.toggle("active", id === tab);
       });
     }
 
-    function fillQuery(text) {
-      switchTab("overview");
-      const input = document.getElementById("ai-query-input");
-      input.value = text;
-      handleUserQuery();
+    function selectWorkflow(wfKey) {
+      currentWorkflow = wfKey;
+      ["triage", "decision", "architecture", "cyber", "governance"].forEach(k => {
+        document.getElementById(`wf-${k}`).classList.toggle("active", k === wfKey);
+      });
+      document.getElementById("active-wf-title").textContent = workflowMeta[wfKey].title;
     }
 
-    function clearConversation() {
-      document.getElementById("chat-history").innerHTML = "";
-      document.getElementById("ai-response-container").classList.add("hidden");
+    function loadSampleScenario() {
+      const m = workflowMeta[currentWorkflow];
+      document.getElementById("req-title").value = m.sampleTitle;
+      document.getElementById("req-originator").value = m.sampleOriginator;
+      document.getElementById("req-suspense").value = m.sampleSuspense;
+      document.getElementById("req-facts").value = m.sampleFacts;
+      document.getElementById("req-gaps").value = m.sampleGaps;
+      generateAdvisoryPackage();
     }
 
-    async function handleUserQuery() {
-      const inputEl = document.getElementById("ai-query-input");
-      const rawQuery = inputEl.value.trim();
-      if (!rawQuery) return;
+    async function generateAdvisoryPackage() {
+      const m = workflowMeta[currentWorkflow];
+      const title = document.getElementById("req-title").value.trim() || "[UNSPECIFIED REQUIREMENT TITLE — ACTION OFFICER TO SUPPLY]";
+      const orig = document.getElementById("req-originator").value.trim() || "[UNSPECIFIED ORIGINATING UNIT]";
+      const suspense = document.getElementById("req-suspense").value.trim() || "TBD (Recommend establishing suspense prior to next governance board)";
+      const facts = document.getElementById("req-facts").value.trim() || "No confirmed operational or technical facts supplied yet. Essential intake questions required below.";
+      const gaps = document.getElementById("req-gaps").value.trim() || "Full lifecycle resourcing (FY POM/OMA), formal Data Owner designation, and eMASS boundary inheritance remain unverified.";
+      const outEl = document.getElementById("advisory-output");
+      const dateStr = new Date().toISOString().slice(0, 10);
 
-      const container = document.getElementById("ai-response-container");
-      const historyEl = document.getElementById("chat-history");
-      const actionButtons = document.getElementById("ai-action-buttons");
-      const badge = document.getElementById("response-badge");
-
-      container.classList.remove("hidden");
-
-      // Append User Message
-      const userBubble = document.createElement("div");
-      userBubble.className = "chat-bubble-user rounded-xl p-3.5 text-xs text-slate-100 ml-auto max-w-2xl";
-      userBubble.innerHTML = `<div class="font-bold text-blue-300 mb-1">You</div><div>${rawQuery.replace(/</g, "&lt;")}</div>`;
-      historyEl.appendChild(userBubble);
-
-      inputEl.value = "";
-
-      // Check if VDI Python Backend is configured
+      // Optional live VDI Python Claude AI routing
       if (window.G6_API_URL) {
-        badge.textContent = "Querying VDI AI Backend...";
+        outEl.textContent = "Routing structured staff request to VDI Python/Claude AI Backend...";
         try {
           const res = await fetch(window.G6_API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ question: rawQuery, history: [], task: "auto" })
+            body: JSON.stringify({
+              question: `Workflow: ${m.title}\nSubject: ${title}\nOriginator: ${orig}\nSuspense: ${suspense}\nFacts: ${facts}\nGaps: ${gaps}`,
+              task: currentWorkflow,
+              history: []
+            })
           });
           if (res.ok) {
             const data = await res.json();
-            appendAiResponse(data.answer || "Response received from VDI AI.", "VDI Claude AI Backend", "Check authoritative G6 SOPs");
+            outEl.textContent = data.answer || "No output returned from VDI backend.";
+            document.getElementById("audit-log-status").textContent = `Audit Trail: Generated via VDI AI (${dateStr}) · Human review required.`;
             return;
           }
-        } catch (e) {
-          console.warn("VDI Backend unreachable, using local Sentinel-6 engine:", e);
+        } catch (err) {
+          console.warn("VDI Backend unreachable; using local CIO/G6 Rubric Engine:", err);
         }
       }
 
-      // Local Sentinel-6 Match
-      const q = rawQuery.toLowerCase();
-      let match = null;
-      let highestScore = 0;
+      const hasSubstantiveFacts = facts.length > 40 && !facts.startsWith("No confirmed");
+      const recommendedCoa = hasSubstantiveFacts
+        ? "COA 2 (Proceed with Conditions / Scoped Pilot)"
+        : "COA 3 (Defer / Gather Essential Information Prior to Board Submission)";
 
-      g6KnowledgeBase.forEach(item => {
-        let score = 0;
-        item.keywords.forEach(kw => {
-          if (q.includes(kw)) score += 1;
-        });
-        if (score > highestScore) {
-          highestScore = score;
-          match = item;
-        }
-      });
+      const draft = `UNCLASSIFIED // USAREUR-AF CIO/G6 VIRTUAL STAFF ADVISOR
+================================================================================
+WORKFLOW TYPE : ${m.title.toUpperCase()}
+SUBJECT       : ${title}
+ORIGINATOR    : ${orig}
+DATE GENERATED: ${dateStr} | TARGET SUSPENSE: ${suspense}
+OWNING G6 DIV : ${m.division}
+AUTHORITY NOTE: Advisory staff product only. Does not constitute CIO/G6 or Command approval.
+================================================================================
 
-      if (match && highestScore > 0) {
-        badge.textContent = match.branch;
-        appendAiResponse(match.answer, match.branch, match.poc);
-      } else {
-        badge.textContent = "G6 General Staff Triage";
-        appendAiResponse(
-          `<strong>G6 Triage Assessment for:</strong> "${rawQuery.replace(/</g, "&lt;")}"<br>1. <strong>Mission &amp; Tactical Comms:</strong> Contact the 24/7 G6 Operations Desk at <strong>DSN 314-537-1110</strong>.<br>2. <strong>Account, Token, or Workstation Support:</strong> Contact AESD-Europe at <strong>DSN 314-542-4357</strong>.<br>3. <strong>Cyber Incident or Spillage:</strong> Call Theater CSOC immediately at <strong>DSN 314-537-9911</strong>.<br>4. Need a formal staff package? Open the <strong>Staff Document Generator</strong> tab above.`,
-          "G6 Staff Triage Engine",
-          "24/7 G6 DOC: DSN 314-537-1110"
-        );
-      }
+1. BLUF (BOTTOM LINE UP FRONT)
+Recommend ${recommendedCoa} for "${title}", contingent upon formal validation of lifecycle resourcing (G8), cybersecurity boundary/RMF controls (G6 Cyber/ISSM), and enterprise architecture alignment prior to operational cutover.
 
-      actionButtons.innerHTML = `
-        <span class="text-slate-400">Advisory response • Verify critical procedures against official USAREUR-AF G6 SOPs</span>
-        <button onclick="switchTab('generator')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-1.5 px-3 rounded-lg">
-          Open Staff Document Generator →
-        </button>
-      `;
+2. DECISION REQUESTED
+• Decision Required             : Determine whether to advance "${title}" to implementation, conditionally pilot, or hold for missing staff artifacts.
+• Recommended Decision Authority: ${m.authority} (Agent does not exercise this authority).
+• Decision Deadline             : ${suspense}
+
+3. CONFIRMED FACTS (Supplied by Action Officer)
+• Originating Staff / Unit: ${orig}
+• Stated Requirement & Scope: ${facts}
+
+4. ASSUMPTIONS REQUIRING HUMAN VALIDATION & INFORMATION GAPS
+• [ASSUMPTION] Proposed capability does not introduce unauthorized cross-domain connections without an approved DISA PPSM CAL entry.
+• [ASSUMPTION] Existing theater transport and hosting capacity can support initial pilot load without degrading priority C2 circuits.
+• [FLAGGED INFORMATION GAPS]: ${gaps}
+• [ESSENTIAL TRIAGE QUESTIONS FOR ORIGINATOR]:
+  1) What is the confirmed funding line (OMA/OPA) for Year-1 procurement AND Year-2+ license/sustainment?
+  2) Which organization is designated as the functional Data Owner / Steward?
+  3) Will this capability inherit an existing eMASS ATO or require a new authorization boundary?
+
+5. CIO/G6 10-CRITERION DECISION RUBRIC ASSESSMENT (Staff Aid Only)
+--------------------------------------------------------------------------------
+CRITERION                      | RATING       | STAFF BASIS & UNCERTAINTY NOTE
+--------------------------------------------------------------------------------
+01. Mission Impact             | HIGH (4/5)   | Directly supports theater C2/readiness; validate with G3/5/7.
+02. Strategic Alignment        | MOD-HIGH(4/5)| Aligns with CIO/G6 modernization; cite specific campaign LOE.
+03. Cybersecurity & Zero Trust | CONDITIONAL  | Requires ISSM STIG/SCAP review & Zero Trust ICAM verification.
+04. Architecture & Interop     | CONDITIONAL  | Verify NATO FMN / Enterprise Reference Architecture fit.
+05. Data Governance            | INCOMPLETE   | Data owner, retention, and access rules must be documented.
+06. Resourcing & Sustainment   | HIGH RISK    | Unfunded sustainment tail flagged; requires G8 & KO validation.
+07. Implementation Feasibility | MODERATE     | Dependent on 2d Theater Sig Bde / NETOPS engineering window.
+08. Policy & Compliance        | REVIEW REQ   | Grounded in DoDI 8500.01, DoDI 8510.01, DoDI 8551.01, AR 25-2.
+09. Risk Tradeoffs             | BALANCED     | Scoped pilot bounds cyber/fiscal exposure while testing value.
+10. Decision Authority Clarity | IDENTIFIED   | Routed to ${m.authority}.
+--------------------------------------------------------------------------------
+
+6. COURSES OF ACTION (COAs)
+• COA 1 — Approve / Proceed Immediately:
+  - Benefits : Fastest delivery to requesting unit (${orig}).
+  - Risks    : High risk of unmitigated RMF findings, PPSM boundary blocks, or unfunded out-year bills.
+  - Approvals: Full AO ATO, G8 fiscal certification, and CIO/G6 architecture sign-off.
+
+• COA 2 — Proceed with Conditions / Scoped 60-Day Pilot [PREFERRED IF FACTS VALIDATED]:
+  - Benefits : Delivers operational proof-of-value while bounding cyber, architecture, and fiscal risk.
+  - Risks    : Moderate administrative overhead to track pilot exit criteria.
+  - Approvals: Interim test authorization (IATT/POA&M via ISSM/AO) and ARB conditional concurrence.
+
+• COA 3 — Defer / Gather Missing Staff Information [REQUIRED IF GAPS UNRESOLVED]:
+  - Benefits : Prevents premature commitment of scarce G6 engineering and fiscal resources.
+  - Risks    : Delays capability delivery to ${orig} past ${suspense}.
+  - Approvals: G6 Division Chief return-without-action for intake completion.
+
+• COA 4 — Decline / Satisfy via Existing Enterprise Baseline:
+  - Benefits : Zero new lifecycle cost or accreditation tail; uses existing authorized theater tools.
+  - Risks    : May only satisfy 70–80% of specialized user feature requests.
+  - Approvals: CIO/G6 Governance Board determination.
+
+7. STAFF RECOMMENDATION
+• Preferred COA       : ${recommendedCoa}
+• Rationale           : Protects theater network security and fiscal discipline while providing a structured path to validate mission value.
+• Conditions Precedent: (1) Written G8 funding verification; (2) ISSM eMASS/PPSM pre-screen; (3) Designated Data Owner concurrence.
+
+8. CONCISE RISK REGISTER & MITIGATIONS
+• [RISK-01 | Cyber/Boundary] Unregistered ports/protocols blocked at DISA boundary -> Mitigation: Submit PPSM worksheet & CAL check 30 days prior (DoDI 8551.01).
+• [RISK-02 | Fiscal/Lifecycle] Unfunded Year-2 license cliff -> Mitigation: Require G8 RM concurrence prior to CCB vote.
+• [RISK-03 | Interoperability] Siloed data format incompatible with HHQ/NATO partners -> Mitigation: Enforce G6 Chief Architect data standards review.
+
+9. REQUIRED COORDINATION & ESCALATION MATRIX
+  [ ] G3/5/7 (Operational Mission Priority Validation)
+  [ ] G8 / Resource Management (Funding Line & Out-Year Sustainment Certification)
+  [ ] G6 Cybersecurity / ISSM / SCA (DoDI 8510.01 RMF & Zero Trust Review)
+  [ ] G6 Enterprise Architecture & Boundary (PPSM & NATO Interoperability)
+  [ ] Chief Data Officer / Data Steward (Data Ownership, Privacy & Retention)
+  [ ] Staff Judge Advocate (SJA) & Contracting (KO) (If vendor/license actions apply)
+
+10. NEXT ACTIONS & SUSPENSE TRACKER
+  1. ACTION: Complete missing intake answers (Funding, Data Owner, eMASS ID) | OPR: ${orig} AO | SUSPENSE: T+5 Days
+  2. ACTION: Conduct Architecture & PPSM pre-screen | OPR: G6 Plans & Architecture | SUSPENSE: T+10 Days
+  3. ACTION: Validate RMF control inheritance / POA&M | OPR: G6 Cybersecurity (ISSM) | SUSPENSE: T+12 Days
+  4. ACTION: Finalize read-ahead for ${m.authority} | OPR: G6 Governance Secretariat | SUSPENSE: ${suspense}
+
+SOURCE GROUNDING CITATIONS:
+• Tier 1: USAREUR-AF CIO/G6 Modernization Priorities (FY26-27 v2.1)
+• Tier 2: DoDI 8500.01, DoDI 8510.01 (RMF), DoDI 8551.01 (PPSM), AR 25-2, AR 25-50
+• Note: Conclusions regarding unit-specific facts are staff assessments based solely on user-supplied text.
+================================================================================
+UNCLASSIFIED // ADVISORY STAFF DRAFT — REQUIRES HUMAN VALIDATION`;
+
+      outEl.textContent = draft;
+      document.getElementById("audit-log-status").textContent =
+        `Audit Trail: Logged [${currentWorkflow.toUpperCase()}] package on ${dateStr} · Grounded in 3 Reference Tiers · Awaiting human disposition.`;
     }
 
-    function appendAiResponse(htmlContent, branchTitle, pocText) {
-      const historyEl = document.getElementById("chat-history");
-      const aiBubble = document.createElement("div");
-      aiBubble.className = "chat-bubble-ai rounded-xl p-4 text-xs text-slate-200 space-y-2 shadow";
-      aiBubble.innerHTML = `
-        <div class="font-bold text-blue-400 uppercase tracking-wide">${branchTitle}</div>
-        <div class="leading-relaxed">${htmlContent}</div>
-        <div class="text-[11px] font-mono text-slate-300 bg-slate-950/90 p-2 rounded border border-slate-800">
-          <strong>Direct Desk / Reference:</strong> ${pocText}
-        </div>
-      `;
-      historyEl.appendChild(aiBubble);
-      historyEl.scrollTop = historyEl.scrollHeight;
-    }
-
-    function generateStaffDoc() {
-      const type = document.getElementById("doc-type").value;
-      const subject = document.getElementById("doc-subject").value.trim() || "[INSERT REQUIREMENT SUBJECT]";
-      const unit = document.getElementById("doc-unit").value.trim() || "USAREUR-AF G6";
-      const context = document.getElementById("doc-context").value.trim() || "Key operational facts, milestones, and technical constraints.";
-      const dateStr = new Date().toISOString().slice(0, 10);
-
-      const templates = {
-        exsum: `UNCLASSIFIED // PUBLIC PROTOTYPE DRAFT\nDATE: ${dateStr}\nORIGINATOR: ${unit}\nSUBJECT: EXECUTIVE SUMMARY (EXSUM) — ${subject}\n\n1. BOTTOM LINE UP FRONT (BLUF):\n   Command awareness and decision summary regarding ${subject}.\n\n2. KEY FACTS & OPERATIONAL CONTEXT:\n   ${context}\n\n3. CYBERSECURITY & ARCHITECTURE ALIGNMENT:\n   • RMF / eMASS: Verify system authorization boundary and STIG compliance.\n   • Boundary / PPSM: Validate required ports and protocols against DISA CAL.\n\n4. NEXT ACTIONS:\n   • Complete G6 division coordination across NETOPS, Cyber, and Plans.\n   • Present final package to the G6 Configuration Control Board (CCB).`,
-        decision: `UNCLASSIFIED // PUBLIC PROTOTYPE DRAFT\nDATE: ${dateStr}\nORIGINATOR: ${unit}\nSUBJECT: DECISION PAPER — ${subject}\n\n1. PURPOSE:\n   To obtain leadership decision regarding ${subject}.\n\n2. FACTS BEARING ON THE PROBLEM:\n   ${context}\n\n3. COURSES OF ACTION (COAs):\n   • COA 1 (Status Quo): Maintain baseline; incurs operational sustainment risk.\n   • COA 2 (Phased Modernization - RECOMMENDED): Meets mission timeline with full RMF compliance.\n\n4. RECOMMENDATION:\n   Approve COA 2 and task G6 functional divisions for execution.`,
-        coa: `UNCLASSIFIED // PUBLIC PROTOTYPE DRAFT\nCOA COMPARISON MATRIX — ${subject}\nORIGINATOR: ${unit} | DATE: ${dateStr}\n\nCONTEXT: ${context}\n\n• COA 1 (Baseline): Low Cost | High Technical Risk | No new eMASS ATO required.\n• COA 2 (Incremental Upgrade - Recommended): Moderate Cost | Low Risk | Leverages inherited RMF controls.\n• COA 3 (Full Replacement): High Cost | 12-Month Schedule | Full eMASS ATO package required.`,
-        ppsm: `UNCLASSIFIED // PUBLIC PROTOTYPE DRAFT\nPPSM FIREWALL EXCEPTION WORKSHEET — ${subject}\nUNIT: ${unit} | DATE: ${dateStr}\n\n1. MISSION JUSTIFICATION:\n   ${context}\n\n2. TRAFFIC PROFILE:\n   • Protocol / Port: TCP 443 (HTTPS)\n   • DISA CAL Alignment: Compliant\n   • ISSM Endorsement: Required prior to boundary implementation.`,
-        satcom: `UNCLASSIFIED // PUBLIC PROTOTYPE DRAFT\nSATCOM SAR / GAR CONCEPT OF OPERATIONS — ${subject}\nUNIT: ${unit} | DATE: ${dateStr}\n\n1. MISSION REQUIREMENT:\n   ${context}\n\n2. COORDINATION CHECKLIST:\n   [ ] SAR submitted via JIST (T-30 Days)\n   [ ] KMI COMSEC keys requested (T-14 Days)\n   [ ] STEP Gateway Access Authorization (GAA) verified.`
-      };
-
-      document.getElementById("doc-output").textContent = templates[type] || templates.exsum;
-    }
-
-    function copyStaffDoc() {
-      const text = document.getElementById("doc-output").textContent;
+    function copyAdvisoryOutput() {
+      const text = document.getElementById("advisory-output").textContent;
       navigator.clipboard.writeText(text);
-      const btn = document.getElementById("copy-doc-btn");
-      btn.textContent = "✓ Copied!";
-      setTimeout(() => { btn.textContent = "📋 Copy Draft"; }, 1500);
+      const btn = document.getElementById("copy-btn");
+      btn.textContent = "✓ Copied to Clipboard";
+      setTimeout(() => { btn.textContent = "📋 Copy Staff Package"; }, 1500);
     }
 
-    function saveVdiUrl() {
-      const url = document.getElementById("vdi-api-url").value.trim();
+    function copySystemPrompt() {
+      const text = document.getElementById("system-prompt-text").textContent;
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById("copy-prompt-btn");
+      btn.textContent = "✓ System Prompt Copied";
+      setTimeout(() => { btn.textContent = "Copy Prompt for VDI Python"; }, 1500);
+    }
+
+    function saveVdiEndpoint() {
+      const url = document.getElementById("vdi-url-input").value.trim();
       window.G6_API_URL = url;
       sessionStorage.setItem("G6_API_URL", url);
-      const status = document.getElementById("vdi-save-status");
-      const pill = document.getElementById("vdi-connection-pill");
+      const msg = document.getElementById("vdi-status-msg");
+      const pill = document.getElementById("engine-status-pill");
       if (url) {
-        status.textContent = `Connected: Queries will route to ${url} with automatic local fallback.`;
-        pill.textContent = "● AI Engine: VDI Endpoint Active";
+        msg.textContent = `Connected: Requests will route to ${url} (with automatic local rubric fallback).`;
+        pill.textContent = "● Engine: VDI Claude AI Connected";
       } else {
-        status.textContent = "Cleared: Running in Local Sentinel-6 Knowledge Engine mode.";
-        pill.textContent = "● AI Engine: Local + VDI Ready";
+        msg.textContent = "Current Mode: Local CIO/G6 Decision-Support Engine (Offline-Safe).";
+        pill.textContent = "● Engine: CIO/G6 Rubric + VDI Ready";
       }
     }
 
-    // Render all 8 Divisions on load
     document.addEventListener("DOMContentLoaded", () => {
-      const grid = document.getElementById("divisions-grid");
-      if (grid) {
-        grid.innerHTML = g6Divisions.map(d => `
-          <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between hover:border-blue-500 transition">
+      const kbContainer = document.getElementById("kb-cards-container");
+      if (kbContainer) {
+        kbContainer.innerHTML = controlledSources.map(s => `
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
             <div>
-              <span class="text-[11px] font-mono font-bold text-blue-400 bg-blue-950/70 border border-blue-800 px-2 py-0.5 rounded">${d.code}</span>
-              <h4 class="text-sm font-bold text-white mt-2">${d.name}</h4>
-              <p class="text-xs text-slate-400 mt-1 mb-4">${d.desc}</p>
+              <span class="text-[10px] font-mono font-bold text-blue-400 bg-blue-950 border border-blue-800 px-2 py-0.5 rounded">${s.group}</span>
+              <h3 class="text-sm font-bold text-white mt-2">${s.title}</h3>
             </div>
-            <button onclick="fillQuery('${d.query}')" class="w-full text-left bg-slate-900 hover:bg-slate-800 text-blue-300 rounded-lg px-3 py-2 text-xs flex justify-between items-center border border-slate-800">
-              <span>Launch Division Workflow</span><span>→</span>
-            </button>
+            <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400 space-y-1 font-mono">
+              <div><strong>Owner:</strong> ${s.owner}</div>
+              <div><strong>Version:</strong> ${s.version}</div>
+              <div><strong>Scope:</strong> ${s.applicability}</div>
+              <div><strong>Review Cycle:</strong> ${s.cycle}</div>
+            </div>
           </div>
         `).join("");
       }
