@@ -1,16 +1,14 @@
-
 [
   {
-    "id": "EXAMPLE-001",
-    "title": "Approved Public IT Reference",
-    "url": "https://www.nist.gov/",
-    "owner": "Knowledge manager — replace with verified owner",
-    "version": "Example record",
-    "date": "2026-10-29",
-    "applicability": "Illustrative metadata only; not approved G6 policy",
-    "review_cycle": "Quarterly",
-    "status": "example",
-    "excerpt": "Replace with a short, verified excerpt from a reviewed document before approving this source."
+    "id": "NIST-CSF-2.0-001",
+    "title": "NIST Cybersecurity Framework 2.0",
+    "url": https://www.nist.gov/cyberframework,
+    "owner": "National Institute of Standards and Technology",
+    "version": "2.0",
+    "date": "2024-02-26",
+    "applicability": "Public cybersecurity risk management reference. Applicability to Army systems requires appropriate review.",
+    "review_cycle": "Annual",
+    "status": "pending_review",
+    "excerpt": "Framework for managing and reducing cybersecurity risks."
   }
 ]
-
